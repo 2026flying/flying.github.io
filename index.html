@@ -625,7 +625,7 @@
       <!-- 按钮 1：已分享群友 -->
       <button class="jump-btn" id="jumpBtn" type="button">
         <span class="full">已分享群友</span><span class="short">群友</span>
-        <span class="pill" id="doneCount">2</span>
+        <span class="pill" id="doneCount">1</span>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
              aria-hidden="true">
@@ -636,7 +636,7 @@
       <!-- 按钮 2：已分享书名 -->
       <button class="jump-btn" id="bookBtn" type="button">
         <span class="full">已分享书名</span><span class="short">书单</span>
-        <span class="pill" id="bookCount">2</span>
+        <span class="pill" id="bookCount">1</span>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
              aria-hidden="true">
@@ -728,7 +728,7 @@
   <section class="card" id="shared-list">
     <div class="card-head">
       <h2>已发布分享的群友</h2>
-      <span class="tag"><span id="doneCount2">2</span> / <span id="totalCount">100</span></span>
+      <span class="tag"><span id="doneCount2">1</span> / <span id="totalCount">100</span></span>
     </div>
 
     <ul class="members" id="memberList"></ul>
@@ -743,7 +743,7 @@
   <section class="card" id="book-list">
     <div class="card-head">
       <h2>已分享的书</h2>
-      <span class="tag">点击书名查看详情 · <span id="bookCount2">2</span> 本</span>
+      <span class="tag">点击书名查看详情 · <span id="bookCount2">1</span> 本</span>
     </div>
 
     <ul class="books" id="bookList"></ul>
@@ -804,26 +804,6 @@
         '耐心不是毅力带来的结果，而是具有长远目光的结果',
         '真正的学习成长不是‘努力，努力再努力’，而是‘反馈，反馈再反馈'
       ]
-    },
-    {
-      title: '《非暴力沟通》',
-      author: '马歇尔·卢森堡',
-      speaker: 'Red-杭州',
-      date: '2026-10-14',
-      summary: [
-        '这本书把“好好说话”拆成了一套可以练的四步：观察、感受、需要、请求。先说清事实（不带评价），再说出自己的感受，接着说出感受背后的需要，最后提出一个具体、可执行的请求。',
-        '它真正想解决的，不是“怎么说服别人”，而是“怎么在冲突里既不委屈自己，也不伤害别人”。作者反复强调：感受的根源在自己身上，别人的言行只是导火索，真正点燃它的是我们未被满足的需要。'
-      ],
-      reason: [
-        '适合一开口就容易吵起来、事后又后悔的人；适合习惯把情绪憋着、最后一次性爆发的人；也适合带团队、做管理、当老师，需要经常给别人反馈的人。',
-        '推荐理由是：大多数沟通书停在“要共情”“要倾听”这种正确但没法执行的口号上，这本书给了可以直接套用的句式——“当我看到……我感到……因为我需要……你愿意……吗？”。练熟之后你会发现，很多争吵根本不是观点不同，只是需要没被说出来。'
-      ],
-      quotes: [
-        '也许我们并不认为自己的谈话方式是暴力的，但我们的语言确实常常引发自己和他人的痛苦。',
-        '不带评论的观察，是人类智力的最高形式。',
-        '感受的根源在于我们自身，我们的需要和期待，以及对他人言行的看法，导致了我们的感受。',
-        '当对方说“不”的时候，他其实是在说另一个尚未被满足的需要。'
-      ]
     }
   ];
 
@@ -833,8 +813,7 @@
         在数组末尾按顺序追加昵称即可。
      ===================================================== */
   const MEMBERS = [
-    'Flying',
-    'Red-杭州'
+    'Flying'
   ];
 
   /* ③ 群友总名额 */
