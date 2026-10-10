@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>读书群 · 每周三分享</title>
+<style>
+  :root{
+    --bg:#faf9f6;
+    --card:#ffffff;
+    --ink:#23272b;
+    --body:#3a4148;
+    --sub:#71787e;
+    --line:#eae7e1;
+    --dash:#efedea;
+    --accent:#2e6b5a;
+    --accent-dark:#255a4b;
+    --accent-soft:#e8f1ed;
+    --topbar-h:60px;
+  }
+
+  *{box-sizing:border-box}
+  html{
+    -webkit-text-size-adjust:100%;
+    scroll-behavior:smooth;
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+                "Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ============ 顶部固定栏 ============ */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(250,249,246,.88);
+    -webkit-backdrop-filter:saturate(160%) blur(12px);
+    backdrop-filter:saturate(160%) blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:720px;
+    margin:0 auto;
+    height:var(--topbar-h);
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .brand{
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:.04em;
+    color:var(--sub);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .brand::before{
+    content:"";
+    display:inline-block;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--accent);
+    margin-right:9px;
+    vertical-align:1px;
+  }
+
+  .actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex:none;
+  }
+
+  /* 跳转按钮 */
+  .jump-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 15px;
+    border:0;
+    border-radius:999px;
+    background:var(--accent);
+    color:#fff;
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:.02em;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .18s ease, transform .18s ease, box-shadow .18s ease;
+    box-shadow:0 6px 16px -10px rgba(46,107,90,.9);
+  }
+  .jump-btn:hover{
+    background:var(--accent-dark);
+    transform:translateY(-1px);
+  }
+  .jump-btn:active{transform:translateY(0)}
+  .jump-btn:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+  }
+  .jump-btn .pill{
+    background:rgba(255,255,255,.24);
+    border-radius:999px;
+    padding:0 7px;
+    font-size:11.5px;
+    font-variant-numeric:tabular-nums;
+    line-height:18px;
+  }
+  .jump-btn svg{width:14px;height:14px;flex:none}
+  .jump-btn .short{display:none}
+
+  /* ============ 内容容器 ============ */
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:46px 20px 96px;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.16em;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:5px 14px;
+    border-radius:999px;
+    margin:0 0 22px;
+  }
+
+  h1{
+    font-size:clamp(27px,5.6vw,38px);
+    line-height:1.32;
+    letter-spacing:-.01em;
+    font-weight:700;
+    margin:0 0 20px;
+  }
+  h1 em{font-style:normal;color:var(--accent)}
+
+  .lede{
+    font-size:16px;
+    color:#4d555c;
+    margin:0;
+    max-width:36em;
+  }
+  .lede b{color:var(--ink);font-weight:600}
+
+  /* ============ 卡片 ============ */
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:30px 28px;
+    margin-top:32px;
+    box-shadow:0 1px 2px rgba(30,30,30,.03),
+               0 12px 28px -22px rgba(30,30,30,.35);
+    scroll-margin-top:calc(var(--topbar-h) + 20px);
+  }
+
+  .card-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    padding-bottom:16px;
+    margin-bottom:22px;
+    border-bottom:1px solid var(--line);
+  }
+  .card-head h2{
+    font-size:17px;
+    font-weight:700;
+    margin:0;
+    letter-spacing:.01em;
+  }
+  .card-head .tag{
+    font-size:12px;
+    color:var(--sub);
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    white-space:nowrap;
+  }
+
+  /* ============ 格式列表 ============ */
+  .format{
+    list-style:none;
+    margin:0;
+    padding:0;
+    counter-reset:f;
+  }
+  .format li{
+    counter-increment:f;
+    display:flex;
+    gap:2px;
+    padding:9px 0;
+    font-size:15.5px;
+    color:#2c3238;
+    border-bottom:1px dashed var(--dash);
+  }
+  .format li:last-child{border-bottom:0}
+  .format li::before{
+    content:counter(f) "、";
+    color:var(--accent);
+    font-weight:600;
+  }
+
+  /* ============ 日期 + 下次推书人 ============ */
+  .schedule{
+    margin-top:24px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:8px 20px;
+    font-size:14.5px;
+  }
+  .schedule .date{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:var(--sub);
+    letter-spacing:.02em;
+  }
+  .schedule .next{color:var(--sub)}
+  .mention{color:var(--accent);font-weight:600}
+
+  /* ============ 内容字段 ============ */
+  .field{margin-bottom:24px}
+  .field:last-of-type{margin-bottom:0}
+
+  .label{
+    font-size:14px;
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+
+  .value{
+    font-size:15.5px;
+    line-height:1.8;
+    color:var(--body);
+  }
+  .value p{margin:0 0 10px}
+  .value p:last-child{margin-bottom:0}
+  .value strong{
+    font-weight:600;
+    color:#1f2429;
+    font-size:16.5px;
+  }
+  .value .author{
+    display:inline-block;
+    margin-left:8px;
+    font-size:14px;
+    color:var(--sub);
+  }
+
+  /* ============ 金句 ============ */
+  .quotes p{
+    margin:0 0 12px;
+    padding-left:16px;
+    border-left:3px solid #d7e8e1;
+    color:#2a3a35;
+    font-size:15.5px;
+  }
+  .quotes p:last-child{margin-bottom:0}
+
+  /* ============ 已分享群友列表 ============ */
+  .members{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .member{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    min-width:0;
+    padding:9px 11px;
+    border:1px solid #f0eeea;
+    border-radius:10px;
+    background:#fbfaf8;
+    font-size:13.5px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .member .idx{
+    flex:none;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11.5px;
+    line-height:1;
+    color:#b7bcb8;
+    font-variant-numeric:tabular-nums;
+    letter-spacing:-.02em;
+  }
+  .member .name{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color:#3a4148;
+  }
+
+  .member.done{
+    background:var(--accent-soft);
+    border-color:#d5e7df;
+  }
+  .member.done .idx{color:var(--accent);opacity:.65}
+  .member.done .name{color:#1f4a3d;font-weight:600}
+
+  .member.empty .name{color:#bcc0bc}
+
+  /* ============ 已分享书单 ============ */
+  .books{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .books li{border-bottom:1px dashed var(--dash)}
+  .books li:last-child{border-bottom:0}
+
+  .book-item{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    width:calc(100% + 28px);
+    margin:0 -14px;
+    padding:15px 14px;
+    border:0;
+    border-radius:12px;
+    background:transparent;
+    font:inherit;
+    text-align:left;
+    color:inherit;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .book-item:hover{background:#fbfaf8}
+  .book-item:hover .b-title{color:var(--accent)}
+  .book-item:hover .b-arrow{
+    opacity:1;
+    transform:translateX(0);
+  }
+  .book-item:active{background:#f5f3ef}
+  .book-item:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:-2px;
+  }
+
+  .books .b-idx{
+    flex:none;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px;
+    line-height:1;
+    color:#b7bcb8;
+    font-variant-numeric:tabular-nums;
+    letter-spacing:-.02em;
+    transform:translateY(-2px);
+  }
+  .books .b-title{
+    flex:1 1 auto;
+    min-width:0;
+    font-size:15.5px;
+    font-weight:600;
+    color:#1f2429;
+    line-height:1.55;
+    transition:color .15s ease;
+  }
+  .books .b-meta{
+    flex:none;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:1px;
+    font-size:12.5px;
+    line-height:1.5;
+    color:var(--sub);
+    white-space:nowrap;
+  }
+  .books .b-meta .who{color:var(--accent);font-weight:600}
+
+  .books .b-arrow{
+    flex:none;
+    width:15px;height:15px;
+    color:var(--accent);
+    opacity:0;
+    transform:translateX(-4px);
+    transition:opacity .18s ease, transform .18s ease;
+    align-self:center;
+  }
+
+  /* 空状态 */
+  .empty-state{
+    margin:0;
+    padding:22px 0 6px;
+    text-align:center;
+    color:#b3b8b3;
+    font-size:14px;
+    letter-spacing:.02em;
+  }
+
+  /* ============ 跳转高亮 ============ */
+  @keyframes flash{
+    0%{box-shadow:0 0 0 0 rgba(46,107,90,.30),
+                  0 12px 28px -22px rgba(30,30,30,.35)}
+    100%{box-shadow:0 0 0 14px rgba(46,107,90,0),
+                    0 12px 28px -22px rgba(30,30,30,.35)}
+  }
+  .card.flash{animation:flash .95s ease-out}
+
+  .legend{
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px dashed var(--dash);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 22px;
+    font-size:13px;
+    color:var(--sub);
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .legend i{
+    width:11px;height:11px;border-radius:3px;flex:none;
+  }
+  .legend .k-done{background:var(--accent-soft);border:1px solid #d5e7df}
+  .legend .k-empty{background:#fbfaf8;border:1px solid #f0eeea}
+
+  /* ============ 弹窗 ============ */
+  .modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px 20px;
+  }
+  .modal[hidden]{display:none}
+
+  .modal-backdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(26,32,29,.44);
+    -webkit-backdrop-filter:blur(3px);
+    backdrop-filter:blur(3px);
+    animation:fadeIn .2s ease-out;
+  }
+
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes riseIn{
+    from{opacity:0;transform:translateY(14px) scale(.985)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+  @keyframes sheetUp{
+    from{transform:translateY(100%)}
+    to{transform:translateY(0)}
+  }
+
+  .modal-panel{
+    position:relative;
+    width:min(640px,100%);
+    max-height:min(86vh,880px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:34px 32px 32px;
+    box-shadow:0 32px 70px -32px rgba(18,28,24,.55);
+    animation:riseIn .24s cubic-bezier(.2,.7,.3,1);
+  }
+
+  .modal-close{
+    position:absolute;
+    top:16px;
+    right:16px;
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:0;
+    border-radius:50%;
+    background:#f4f2ee;
+    color:#6b7278;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .modal-close:hover{background:#e9e6e0;color:#2b3136}
+  .modal-close:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+  }
+  .modal-close svg{width:15px;height:15px}
+
+  .modal-head{padding-right:46px}
+  .modal-title{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    line-height:1.42;
+    letter-spacing:-.01em;
+    color:#1f2429;
+  }
+  .modal-author{
+    margin:8px 0 0;
+    font-size:14px;
+    color:var(--sub);
+  }
+
+  .modal-meta{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:8px 16px;
+    margin:18px 0 24px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .modal-meta .date{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:var(--sub);
+    letter-spacing:.02em;
+  }
+
+  /* ============ 页脚 ============ */
+  .foot{
+    text-align:center;
+    color:#a8ada9;
+    font-size:13.5px;
+    letter-spacing:.06em;
+    margin:40px 0 0;
+  }
+
+  /* ============ 响应式 ============ */
+  @media (max-width:640px){
+    .members{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+
+  @media (max-width:600px){
+    .brand{display:none}
+    .topbar-inner{justify-content:center;padding:0 16px}
+    .jump-btn{padding:7px 12px;font-size:13px;gap:6px}
+    .jump-btn .full{display:none}
+    .jump-btn .short{display:inline}
+    .jump-btn .pill{padding:0 6px;font-size:11px}
+    .jump-btn svg{display:none}
+  }
+
+  @media (max-width:560px){
+    .modal{
+      align-items:flex-end;
+      padding:0;
+    }
+    .modal-panel{
+      width:100%;
+      max-height:88vh;
+      border-radius:20px 20px 0 0;
+      border-bottom:0;
+      padding:28px 22px 30px;
+      animation:sheetUp .26s cubic-bezier(.2,.7,.3,1);
+    }
+    .modal-title{font-size:19.5px}
+  }
+
+  @media (max-width:520px){
+    .wrap{padding:34px 16px 72px}
+    .card{padding:24px 20px;border-radius:16px}
+    h1{font-size:26px}
+    .card-head{flex-direction:column;gap:4px}
+
+    .book-item{
+      flex-wrap:wrap;
+      gap:2px 10px;
+      width:calc(100% + 24px);
+      margin:0 -12px;
+      padding:13px 12px;
+    }
+    .books .b-title{flex:1 1 calc(100% - 32px)}
+    .books .b-meta{
+      flex:1 1 100%;
+      flex-direction:row;
+      align-items:center;
+      gap:10px;
+      padding-left:30px;
+      white-space:normal;
+    }
+    .books .b-arrow{display:none}
+  }
+
+  @media (max-width:400px){
+    .members{grid-template-columns:1fr}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .card.flash{animation:none}
+    .jump-btn{transition:none}
+    .modal-backdrop,.modal-panel{animation:none}
+    .book-item,.b-arrow{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部固定栏 ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">读书群 · 每周三分享</span>
+
+    <div class="actions">
+      <!-- 按钮 1：已分享群友 -->
+      <button class="jump-btn" id="jumpBtn" type="button">
+        <span class="full">已分享群友</span><span class="short">群友</span>
+        <span class="pill" id="doneCount">2</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M8 3v10M3.5 8.5L8 13l4.5-4.5"/>
+        </svg>
+      </button>
+
+      <!-- 按钮 2：已分享书名 -->
+      <button class="jump-btn" id="bookBtn" type="button">
+        <span class="full">已分享书名</span><span class="short">书单</span>
+        <span class="pill" id="bookCount">2</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M8 3v10M3.5 8.5L8 13l4.5-4.5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ===== 上部分：活动说明 ===== -->
+  <header>
+    <span class="eyebrow">读书群 · 分享活动</span>
+    <h1>推荐一本书，<br>给你<em>亲爱</em>的群友</h1>
+    <p class="lede">
+      一场读书分享活动：从 <b>10 月 7 日</b> 开始，
+      <b>每周三</b>，一位群友分享一本书；群成员每人分享一次。<span style="color: #2e6b5a;">分享顺序按群列表（进群顺序）</span>
+    </p>
+  </header>
+
+  <!-- 分享格式 -->
+  <section class="card">
+    <div class="card-head">
+      <h2>分享格式</h2>
+      <span class="tag">照这个写就行</span>
+    </div>
+
+    <ol class="format">
+      <li>书名：</li>
+      <li>核心主旨：</li>
+      <li>适合谁读 / 推荐理由：</li>
+      <li>书中金句：</li>
+    </ol>
+
+    <div class="schedule">
+      <span class="date">2026-10-14（每周三）</span>
+      <span class="next">下次推书人：<span class="mention">@你后面的下一位群友</span></span>
+    </div>
+  </section>
+
+  <!-- ===== 下部分：示例 ===== -->
+  <section class="card">
+    <div class="card-head">
+      <h2>分享示例</h2>
+    </div>
+
+    <div class="field">
+      <div class="label">1、书名：</div>
+      <div class="value">
+        <strong>《被讨厌的勇气》</strong>
+        <span class="author">作者：岸见一郎、古贺史健</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">2、核心主旨：</div>
+      <div class="value">
+        <p>这本书用“青年与哲人对话”的方式讲阿德勒心理学：人不是被过去决定的，而是被当下的目的驱动；一切烦恼大多来自人际关系；真正的自由，是拥有“被讨厌的勇气”。</p>
+        <p>它不教你讨好世界，而是教你分清“我的课题”和“别人的课题”，把人生的主动权拿回来。</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">3、适合谁读 / 推荐理由：</div>
+      <div class="value">
+        <p>适合容易内耗、讨好型人格、太在意别人评价、总跟别人比较、被过去困住的人。</p>
+        <p>推荐理由是：它不像鸡汤，只让你“想开点”，而是给出具体思路，比如课题分离、目的论、横向关系。读完不一定立刻改变，但你会开始分辨：哪些事是我的事，哪些事根本不该我背。</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">4、书中金句：</div>
+      <div class="quotes">
+        <p>“一切烦恼都是人际关系的烦恼。”</p>
+        <p>“所谓的自由，就是被别人讨厌。”</p>
+        <p>“决定你人生的不是过去的经历，而是你赋予经历的意义。”</p>
+      </div>
+    </div>
+
+    <div class="schedule">
+      <span class="date">2026-10-14</span>
+      <span class="next">下次推书人：<span class="mention">@Red-杭州</span></span>
+    </div>
+  </section>
+
+  <!-- ===== 已分享群友列表（跳转目标 1） ===== -->
+  <section class="card" id="shared-list">
+    <div class="card-head">
+      <h2>已发布分享的群友</h2>
+      <span class="tag"><span id="doneCount2">2</span> / <span id="totalCount">100</span></span>
+    </div>
+
+    <ul class="members" id="memberList"></ul>
+
+    <div class="legend">
+      <span><i class="k-done"></i>已分享</span>
+      <span><i class="k-empty"></i>虚位以待</span>
+    </div>
+  </section>
+
+  <!-- ===== 已分享书单（跳转目标 2） ===== -->
+  <section class="card" id="book-list">
+    <div class="card-head">
+      <h2>已分享的书</h2>
+      <span class="tag">点击书名查看详情 · <span id="bookCount2">2</span> 本</span>
+    </div>
+
+    <ul class="books" id="bookList"></ul>
+
+    <p class="empty-state" id="bookEmpty" style="display:none">
+      还没有分享记录，第一位群友会是谁呢？
+    </p>
+  </section>
+
+  <p class="foot">每周三 · 等一位群友来分享</p>
+
+</div>
+
+<!-- ============ 弹窗：分享详情 ============ -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+
+  <div class="modal-panel" role="dialog" aria-modal="true"
+       aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button"
+            data-close aria-label="关闭">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+           stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 4l8 8M12 4l-8 8"/>
+      </svg>
+    </button>
+
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =====================================================
+     ① 已分享的书 —— 书单数据（含完整分享内容）
+        每加一本，就在数组末尾追加一个对象即可。
+        点击书单里的书名，会弹出这个对象的完整内容。
+     ===================================================== */
+  const BOOKS = [
+    {
+      title: '《认知觉醒：开启自我改变的原动力》',
+      author: '周岭',
+      speaker: 'Flying',
+      date: '2026-10-07',
+      summary: [
+        '这本书用脑科学和认知心理学，解释了“为什么我们努力了却看不到改变”。作者指出，我们的大脑由本能脑、情绪脑和理智脑三重结构组成，大多数决策其实被本能和情绪主导，而非理智。焦虑的根源只有两条：想同时做很多事，又想立即看到效果。',
+        '书里给出的解法不是“更努力”，而是“更清醒”——用元认知看清自己，在舒适区边缘做踮脚能够到的事，用“反馈”代替“打卡”，用“改变量”衡量成长。'
+      ],
+      reason: [
+        '适合明明很努力却总觉得没进步、陷入“假勤奋”怪圈的人；适合习惯性内耗、被焦虑推着走却停不下来的人；也适合读了很多书、上了很多课，但生活并没有真正改变的人。',
+        '推荐理由是：它不讲“你要自律”“你要坚持”这类正确的废话，而是从大脑运行规律出发，告诉你为什么“强行自律只会陷入恶性循环”。它给了很具体的工具——“舒适区边缘”“消除模糊”“五分钟起步法”——让改变从“知道”落到“做到”。。'
+      ],
+      quotes: [
+        '人生是一场消除模糊的比赛。谁的模糊越严重，谁就越混沌；谁的模糊越轻微，谁就越清醒。',
+        '焦虑的根源是急于求成和避难趋易',
+        '耐心不是毅力带来的结果，而是具有长远目光的结果',
+        '真正的学习成长不是‘努力，努力再努力’，而是‘反馈，反馈再反馈'
+      ]
+    },
+    {
+      title: '《非暴力沟通》',
+      author: '马歇尔·卢森堡',
+      speaker: 'Red-杭州',
+      date: '2026-10-14',
+      summary: [
+        '这本书把“好好说话”拆成了一套可以练的四步：观察、感受、需要、请求。先说清事实（不带评价），再说出自己的感受，接着说出感受背后的需要，最后提出一个具体、可执行的请求。',
+        '它真正想解决的，不是“怎么说服别人”，而是“怎么在冲突里既不委屈自己，也不伤害别人”。作者反复强调：感受的根源在自己身上，别人的言行只是导火索，真正点燃它的是我们未被满足的需要。'
+      ],
+      reason: [
+        '适合一开口就容易吵起来、事后又后悔的人；适合习惯把情绪憋着、最后一次性爆发的人；也适合带团队、做管理、当老师，需要经常给别人反馈的人。',
+        '推荐理由是：大多数沟通书停在“要共情”“要倾听”这种正确但没法执行的口号上，这本书给了可以直接套用的句式——“当我看到……我感到……因为我需要……你愿意……吗？”。练熟之后你会发现，很多争吵根本不是观点不同，只是需要没被说出来。'
+      ],
+      quotes: [
+        '也许我们并不认为自己的谈话方式是暴力的，但我们的语言确实常常引发自己和他人的痛苦。',
+        '不带评论的观察，是人类智力的最高形式。',
+        '感受的根源在于我们自身，我们的需要和期待，以及对他人言行的看法，导致了我们的感受。',
+        '当对方说“不”的时候，他其实是在说另一个尚未被满足的需要。'
+      ]
+    }
+  ];
+
+  /* =====================================================
+     ② 已分享的群友 —— 群友名单
+        第 1 位已填 Flying，后续有群友分享后
+        在数组末尾按顺序追加昵称即可。
+     ===================================================== */
+  const MEMBERS = [
+    'Flying',
+    'Red-杭州'
+  ];
+
+  /* ③ 群友总名额 */
+  const TOTAL = 100;
+
+
+  /* =============== 工具函数 =============== */
+  const $ = function (id) { return document.getElementById(id); };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function pad2(n) { return String(n).padStart(2, '0'); }
+
+
+  /* =============== 渲染：群友列表 =============== */
+  (function renderMembers() {
+    const listEl = $('memberList');
+    const frag = document.createDocumentFragment();
+
+    for (let i = 0; i < TOTAL; i++) {
+      const name = MEMBERS[i];
+      const li = document.createElement('li');
+      li.className = 'member ' + (name ? 'done' : 'empty');
+
+      const idx = document.createElement('span');
+      idx.className = 'idx';
+      idx.textContent = pad2(i + 1);
+
+      const nameEl = document.createElement('span');
+      nameEl.className = 'name';
+      nameEl.textContent = name ? '@' + name : '虚位以待';
+
+      li.append(idx, nameEl);
+      frag.appendChild(li);
+    }
+    listEl.appendChild(frag);
+
+    const done = Math.min(MEMBERS.length, TOTAL);
+    $('doneCount').textContent = done;
+    $('doneCount2').textContent = done;
+    $('totalCount').textContent = TOTAL;
+  })();
+
+
+  /* =============== 渲染：书单 =============== */
+  (function renderBooks() {
+    const listEl  = $('bookList');
+    const emptyEl = $('bookEmpty');
+
+    $('bookCount').textContent  = BOOKS.length;
+    $('bookCount2').textContent = BOOKS.length;
+
+    if (BOOKS.length === 0) {
+      listEl.style.display = 'none';
+      return;
+    }
+    emptyEl.style.display = 'none';
+
+    const frag = document.createDocumentFragment();
+
+    BOOKS.forEach(function (book, i) {
+      const li = document.createElement('li');
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'book-item';
+      btn.dataset.idx = String(i);
+      btn.setAttribute('aria-haspopup', 'dialog');
+      btn.title = '点击查看完整分享内容';
+
+      const idx = document.createElement('span');
+      idx.className = 'b-idx';
+      idx.textContent = pad2(i + 1);
+
+      const title = document.createElement('span');
+      title.className = 'b-title';
+      title.textContent = book.title;
+
+      const meta = document.createElement('span');
+      meta.className = 'b-meta';
+
+      const who = document.createElement('span');
+      who.className = 'who';
+      who.textContent = '@' + book.speaker;
+
+      const when = document.createElement('span');
+      when.className = 'when';
+      when.textContent = book.date || '';
+
+      meta.append(who, when);
+
+      const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      arrow.setAttribute('class', 'b-arrow');
+      arrow.setAttribute('viewBox', '0 0 16 16');
+      arrow.setAttribute('fill', 'none');
+      arrow.setAttribute('stroke', 'currentColor');
+      arrow.setAttribute('stroke-width', '1.8');
+      arrow.setAttribute('stroke-linecap', 'round');
+      arrow.setAttribute('stroke-linejoin', 'round');
+      arrow.setAttribute('aria-hidden', 'true');
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d', 'M6 3.5L10.5 8L6 12.5');
+      arrow.appendChild(p);
+
+      btn.append(idx, title, meta, arrow);
+      li.appendChild(btn);
+      frag.appendChild(li);
+    });
+
+    listEl.appendChild(frag);
+  })();
+
+
+  /* =============== 弹窗逻辑 =============== */
+  const modal      = $('modal');
+  const modalBody  = $('modalBody');
+  const modalClose = $('modalClose');
+
+  let lastTrigger = null;
+  let isOpen = false;
+
+  /* 生成弹窗内容 */
+  function buildBookHTML(book) {
+    const parts = [];
+
+    /* 标题区 */
+    parts.push(
+      '<div class="modal-head">' +
+        '<h3 class="modal-title" id="modalTitle">' + esc(book.title) + '</h3>' +
+        (book.author
+          ? '<p class="modal-author">作者：' + esc(book.author) + '</p>'
+          : '') +
+      '</div>'
+    );
+
+    /* 分享人 / 日期 */
+    parts.push(
+      '<div class="modal-meta">' +
+        '<span class="mention">@' + esc(book.speaker) + '</span>' +
+        (book.date ? '<span class="date">' + esc(book.date) + '</span>' : '') +
+      '</div>'
+    );
+
+    /* 核心主旨 */
+    if (book.summary && book.summary.length) {
+      parts.push(
+        '<div class="field">' +
+          '<div class="label">核心主旨</div>' +
+          '<div class="value">' +
+            book.summary.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    /* 适合谁读 / 推荐理由 */
+    if (book.reason && book.reason.length) {
+      parts.push(
+        '<div class="field">' +
+          '<div class="label">适合谁读 / 推荐理由</div>' +
+          '<div class="value">' +
+            book.reason.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    /* 书中金句 */
+    if (book.quotes && book.quotes.length) {
+      parts.push(
+        '<div class="field">' +
+          '<div class="label">书中金句</div>' +
+          '<div class="quotes">' +
+            book.quotes.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    return parts.join('');
+  }
+
+  /* 打开 */
+  function openModal(idx, trigger) {
+    const book = BOOKS[idx];
+    if (!book) return;
+
+    lastTrigger = trigger || null;
+    modalBody.innerHTML = buildBookHTML(book);
+
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    isOpen = true;
+
+    /* 面板滚回顶部 */
+    const panel = modal.querySelector('.modal-panel');
+    if (panel) panel.scrollTop = 0;
+
+    /* 焦点移到关闭按钮 */
+    window.setTimeout(function () {
+      try { modalClose.focus({ preventScroll: true }); }
+      catch (e) { modalClose.focus(); }
+    }, 20);
+  }
+
+  /* 关闭 */
+  function closeModal() {
+    if (!isOpen) return;
+
+    modal.hidden = true;
+    modalBody.innerHTML = '';
+    document.body.style.overflow = '';
+    isOpen = false;
+
+    if (lastTrigger && typeof lastTrigger.focus === 'function') {
+      try { lastTrigger.focus({ preventScroll: true }); }
+      catch (e) { lastTrigger.focus(); }
+    }
+    lastTrigger = null;
+  }
+
+  /* 书单点击 */
+  $('bookList').addEventListener('click', function (e) {
+    const btn = e.target.closest('.book-item');
+    if (!btn) return;
+    openModal(Number(btn.dataset.idx), btn);
+  });
+
+  /* 关闭：遮罩 / 关闭按钮（统一用 data-close） */
+  modal.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close]')) closeModal();
+  });
+
+  /* 关闭：ESC */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen) closeModal();
+  });
+
+
+  /* =============== 顶部按钮：跳转 + 高亮 =============== */
+  function bindJump(btnId, targetId) {
+    const btn    = $(btnId);
+    const target = $(targetId);
+    if (!btn || !target) return;
+
+    btn.addEventListener('click', function () {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      target.classList.remove('flash');
+      void target.offsetWidth;              // 重置动画
+      target.classList.add('flash');
+
+      window.clearTimeout(target._flashTimer);
+      target._flashTimer = window.setTimeout(function () {
+        target.classList.remove('flash');
+      }, 1000);
+    });
+  }
+
+  bindJump('jumpBtn', 'shared-list');
+  bindJump('bookBtn', 'book-list');
+
+})();
+</script>
+</body>
+</html>
