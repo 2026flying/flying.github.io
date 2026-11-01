@@ -7,7 +7,7 @@ export default defineConfig({
 
   // 规范只定义浅色主题，站点固定为浅色，避免阅读时与规范色值产生偏差
   appearance: false,
-  base: '/',
+  base: '/flying.github.io/',
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
