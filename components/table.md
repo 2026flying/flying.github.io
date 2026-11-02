@@ -55,16 +55,16 @@ title: 表格 Table
 
 | 项目 | 要求 | 等级 |
 | --- | --- | --- |
-| 表头背景 | `--color-bg-hover` | 推荐 |
-| 表头字号 | `12px`，颜色 `--color-text-primary`，字重 600 | 推荐 |
+| 表头背景 | `--color-bg-page` `#F2F3F5` | 推荐 |
+| 表头字号 | `14px` / `600`，颜色 `--color-text-primary`；**不得小于表体** | <span class="level level-must">强制</span> |
 | 分割线 | 只用横向 `1px solid --color-border`，不加竖线 | 推荐 |
-| 操作列 | 固定右侧，**必须用文字按钮** | <span class="level level-must">强制</span> |
+| 操作列 | 固定右侧；≤2 项用文字按钮，≥3 项用 [Chip](/components/chip) | <span class="level level-must">强制</span> |
 | 空数据 | **必须展示空状态** | <span class="level level-must">强制</span> |
 | 行悬停 | 背景 `--color-bg-hover` | 推荐 |
 | 单元格内边距 | `10px 14px` | 推荐 |
 
 <ul class="rules">
-  <li class="must">操作列不得使用图标按钮或彩色按钮，统一文字按钮，且颜色为 `--color-primary`。</li>
+  <li class="must">操作列不得使用实心色块按钮；操作项 ≤ 2 个用文字按钮，≥ 3 个改用 <a href="/components/chip">Chip 操作标签</a>（白底 + 浅描边 + 彩色文字）。</li>
   <li class="must">操作列固定在表格最右侧，水平滚动时不随之移动。</li>
   <li class="must">查询结果为空时必须渲染空状态，禁止留白或只显示表头。</li>
   <li class="must">破坏性操作（删除）放在操作列末尾，且需要二次确认。</li>
@@ -87,15 +87,20 @@ title: 表格 Table
         </tr>
       </thead>
     </table>
-    <div class="empty-state">
-      <div class="empty-icon">◇</div>
-      <div>暂无数据</div>
-      <div style="margin-top:4px;">调整筛选条件后重试，或新建第一条记录</div>
+    <div class="empty-state is-compact">
+      <EmptyArt />
+      <div class="empty-body">
+        <p class="empty-title">暂无数据</p>
+        <p class="empty-desc">调整筛选条件后重试，或新建第一条记录</p>
+        <div class="empty-actions">
+          <button class="btn btn-primary" type="button">新建客户</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-空状态三件套：**图标（弱化）** + **一句结论** + **一个可执行动作**（新建 / 清除筛选）。三者缺一，用户会不知道该做什么。
+空状态三件套：**插画（弱化）** + **一句结论** + **一个可执行动作**（新建 / 清除筛选）。三者缺一，用户会不知道该做什么。完整规格见[空状态](/components/empty-state)。
 
 ## 6.3.4 代码
 
@@ -123,9 +128,10 @@ title: 表格 Table
 
 ```css
 .data-table th {
-  background: var(--color-bg-hover);
-  font-size: var(--font-size-aux);
+  background: var(--color-bg-page);
+  font-size: var(--font-size-body);
   font-weight: 600;
+  letter-spacing: 0.2px;
   text-align: left;
   padding: 10px 14px;
   border-bottom: 1px solid var(--color-border);

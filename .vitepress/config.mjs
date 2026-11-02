@@ -55,9 +55,16 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '按钮 Button', link: '/components/button' },
+          { text: '图标按钮与工具条', link: '/components/icon-button' },
+          { text: '操作标签 Chip', link: '/components/chip' },
+          { text: '状态标签', link: '/components/status-tag' },
           { text: '表单 Form', link: '/components/form' },
           { text: '表格 Table', link: '/components/table' },
-          { text: '弹窗 Modal', link: '/components/modal' }
+          { text: '弹窗 Modal', link: '/components/modal' },
+          { text: '轻提示 Toast', link: '/components/toast' },
+          { text: '进度条 Progress', link: '/components/progress' },
+          { text: '空状态 Empty', link: '/components/empty-state' },
+          { text: '异常页 404', link: '/components/exception' }
         ]
       },
       {

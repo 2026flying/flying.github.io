@@ -36,11 +36,19 @@ features:
 | 章节 | 内容 | 强制等级 |
 | --- | --- | --- |
 | [设计原则](/guide/principles) | 一致优先、克制装饰、状态完整、可验证 | <span class="level level-must">强制</span> |
-| [色彩规范](/foundation/color) | 品牌色、语义色、中性色共 15 个色值 Token | <span class="level level-must">强制</span> |
+| [色彩规范](/foundation/color) | 品牌色、语义色、中性色共 15 个色值，外加 2.4 动作语义色 | <span class="level level-must">强制</span> |
 | [字体与排版](/foundation/typography) | 4 级字号、字重、行高与字体族 | <span class="level level-must">强制</span> |
 | [间距与栅格](/foundation/spacing) | 4px 基础单位、允许值、页面布局尺寸 | <span class="level level-must">强制</span> |
-| [圆角与阴影](/foundation/radius-shadow) | 3 档圆角、2 档阴影、层级用法 | <span class="level level-recommend">推荐</span> |
-| [组件规范](/components/button) | 按钮、表单、表格、弹窗 | <span class="level level-must">强制</span> |
+| [圆角与阴影](/foundation/radius-shadow) | 3 档圆角、3 档阴影、层级用法 | <span class="level level-recommend">推荐</span> |
+| [按钮](/components/button) | 类型、5 状态、12 个动作按钮固定配色 | <span class="level level-must">强制</span> |
+| [图标按钮与工具条](/components/icon-button) | 32×32 图标按钮、进度条、单选复选 | <span class="level level-recommend">推荐</span> |
+| [操作标签 Chip](/components/chip) | 表格操作列的轻量标签形态与配色 | <span class="level level-must">强制</span> |
+| [状态标签](/components/status-tag) | 流程、阅读、启用、委托等状态配色 | <span class="level level-must">强制</span> |
+| [表单](/components/form) / [表格](/components/table) / [弹窗](/components/modal) | 顶部对齐、操作列、空状态、按钮顺序 | <span class="level level-must">强制</span> |
+| [轻提示 Toast](/components/toast) | 成功 / 失败提示条的配色与定位 | <span class="level level-must">强制</span> |
+| [进度条 Progress](/components/progress) | 胶囊轨道、百分比、流光与不确定态 | <span class="level level-must">强制</span> |
+| [空状态 Empty](/components/empty-state) | 无数据 / 无结果 / 无权限的兜底版式 | <span class="level level-must">强制</span> |
+| [异常页 404](/components/exception) | 404 / 403 / 500 统一版式与文案 | <span class="level level-recommend">推荐</span> |
 | [交互与可访问性](/guide/accessibility) | 点击区域、对比度、动效时长 | <span class="level level-recommend">推荐</span> |
 | [交付与验收](/guide/delivery) | 开发侧 Token 交付、测试侧走查清单 | — |
 | [Trae 规则文件](/resources/trae-rules) | 从第 2–8 节派生的 AI 编码规则 | — |
@@ -62,6 +70,12 @@ features:
   --color-warning: #ff7d00;
   --color-danger: #f53f3f;
   --color-info: #86909c;
+
+  /* 动作语义色 */
+  --color-action-warning: #f67437;
+  --color-action-hold: #faad25;
+  --color-action-custom: #15c7d6;
+  --color-action-neutral: #898989;
 
   /* 中性色 */
   --color-text-primary: #1d2129;

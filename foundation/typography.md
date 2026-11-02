@@ -41,7 +41,7 @@ title: 字体与排版
 | 页面标题 | `20px` | `600` | `1.5` | 极少用 |
 | 模块标题 | `16px` | `600` | `1.5` | 弹窗标题、卡片标题 |
 | 正文 / 表格 | `14px` | `400` | `1.5` | 常规表单、数据、按钮 |
-| 辅助说明 | `12px` | `400` | `1.5` | 表头、次要信息 |
+| 辅助说明 | `12px` | `400` | `1.5` | 次要信息、时间戳、计数 |
 
 ## 3.2 字体族
 
@@ -69,6 +69,7 @@ font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
 | 页面标题少用 | 页面内已在导航呈现标题时，正文标题从 16px 起 |
 | 行高固定 1.5 | 不随字号调整，避免多行文本节奏不一致 |
 | 中文不加字间距 | `letter-spacing` 保持默认，仅表头等短标签可用 `0.2px` |
+| 表头不得用辅助字号 | 表头取 `14px` / `600`，比表体更重；禁止 `12px` 表头 |
 
 ## 3.4 代码
 
@@ -105,7 +106,14 @@ font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
   line-height: var(--line-height-base);
 }
 
-/* 表头、次要信息 */
+/* 表头：正文级字号 + 加粗，比表体更重 */
+.text-th {
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  line-height: var(--line-height-base);
+}
+
+/* 次要信息、时间戳、计数 */
 .text-aux {
   font-size: var(--font-size-aux);
   font-weight: 400;

@@ -162,6 +162,89 @@ title: 色彩规范
 | `--color-bg-container` | 卡片、弹窗背景 | `#FFFFFF` |
 | `--color-bg-hover` | 悬停背景、表头背景 | `#F7F8FA` |
 
+## 2.4 动作语义色
+
+用于工具条实心按钮与表格操作标签。这是**固定映射**，不由页面自由选择配色。
+
+<div class="swatch-grid">
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#3370FF; color:#fff;">#3370FF</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-primary</span>
+      <span class="swatch-usage">查询 / 通过 / 催办 / 打印 / 启用</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#F67437; color:#fff;">#F67437</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-action-warning</span>
+      <span class="swatch-usage">重置 / 退回</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#FAAD25; color:#fff;">#FAAD25</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-action-hold</span>
+      <span class="swatch-usage">暂存</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#15C7D6; color:#fff;">#15C7D6</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-action-custom</span>
+      <span class="swatch-usage">自定义按钮（全站唯一）</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#00B42A; color:#fff;">#00B42A</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-success</span>
+      <span class="swatch-usage">撤回 / 流程跟踪</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#F53F3F; color:#fff;">#F53F3F</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-danger</span>
+      <span class="swatch-usage">关闭 / 删除 / 作废 / 禁用</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#898989; color:#fff;">#898989</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-action-neutral</span>
+      <span class="swatch-usage">取消（唯一灰底按钮）</span>
+    </div>
+  </div>
+</div>
+
+| Token | 用途 | 色值 |
+| --- | --- | --- |
+| `--color-primary` | 查询、通过、催办、打印、启用 | `#3370FF` |
+| `--color-action-warning` | 重置、退回 | `#F67437` |
+| `--color-action-hold` | 暂存 | `#FAAD25` |
+| `--color-action-custom` | 自定义按钮 | `#15C7D6` |
+| `--color-success` | 撤回、流程跟踪 | `#00B42A` |
+| `--color-danger` | 关闭、删除、作废、禁用 | `#F53F3F` |
+| `--color-action-neutral` | 取消 | `#898989` |
+
+::: warning 动作色不许自由发挥
+动作色只允许上表 7 种。新增按钮必须归入已有语义，不得新造颜色。截图实测的 `#3772FF` / `#EC3233` / `#14A204` 与 Token 差 4–13 个色阶，属实现偏差，一律回落到 Token 值。
+:::
+
+## 2.5 状态标签色
+
+状态标签不使用实心填充，统一「浅底 + 同色描边 + 同色文字」。
+
+| 色相 | 文字 | 背景 | 典型状态 |
+| --- | --- | --- | --- |
+| 青绿 | `#20BC98` | `#EDFCF8` | 草稿、已读、已审批 |
+| 天蓝 | `#2E9BF0` | `#F6FAFF` | 审批中、未读、浏览 |
+| 橙 | `#F67437` | `#FCEEE8` | 已办结、进行中 |
+| 蓝 | `#3370FF` | `#EBF1FE` | 启用、委托中 |
+| 红 | `#E04303` | `#FBECE5` | 禁用、是 |
+| 灰 | `#ABABAB` | `#F1F1F1` | 已作废、已失效、否 |
+
 ## 用法速查
 
 | 场景 | 前景 | 背景 | 边框 |
@@ -188,6 +271,14 @@ title: 色彩规范
   --color-warning: #ff7d00;
   --color-danger: #f53f3f;
   --color-info: #86909c;
+
+  /* 动作语义色 */
+  --color-action-warning: #f67437;
+  --color-action-hold: #faad25;
+  --color-action-custom: #15c7d6;
+  --color-action-neutral: #898989;
+  --color-action-teal: #20bc98;
+  --color-action-sky: #2e9bf0;
 
   /* 中性色 */
   --color-text-primary: #1d2129;

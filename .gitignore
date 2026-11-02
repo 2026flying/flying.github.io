@@ -1,3 +1,7 @@
 node_modules
-docs/.vitepress/dist
-docs/.vitepress/cache
+# 针对根目录的打包产物
+.vitepress/dist
+.vitepress/cache
+# 如果你的代码在 docs 文件夹里，加上下面两行
+# docs/.vitepress/dist
+# docs/.vitepress/cache

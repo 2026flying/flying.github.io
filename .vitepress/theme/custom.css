@@ -21,6 +21,15 @@
   --color-danger: #f53f3f;
   --color-info: #86909c;
 
+  /* 动作语义色 */
+  --color-action-warning: #f67437;
+  --color-action-hold: #faad25;
+  --color-action-custom: #15c7d6;
+  --color-action-neutral: #898989;
+  --color-action-teal: #20bc98;
+  --color-action-sky: #2e9bf0;
+  --color-action-green: #00b42a;
+
   /* 中性色 */
   --color-text-primary: #1d2129;
   --color-text-secondary: #4e5969;
@@ -217,14 +226,16 @@ body {
   background: transparent;
 }
 
+/* 文档站正文字号为 15px（阅读字号），表头取 16px 以明显高于 14px 的表体；
+   产品界面按规范取 14px / 600 —— 两处都不允许出现 12px 表头或与表体同号同重 */
 .vp-doc th {
-  background: var(--color-bg-hover);
+  background: var(--color-bg-page);
   color: var(--color-text-primary);
-  font-size: var(--font-size-aux);
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.2px;
   text-transform: none;
-  padding: 10px 14px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--color-border);
   white-space: nowrap;
 }
@@ -875,10 +886,11 @@ body {
 }
 
 .data-table th {
-  background: var(--color-bg-hover) !important;
+  background: var(--color-bg-page) !important;
   color: var(--color-text-primary) !important;
-  font-size: var(--font-size-aux) !important;
+  font-size: var(--font-size-body) !important;
   font-weight: 600;
+  letter-spacing: 0.2px;
   text-align: left;
   padding: 10px 14px !important;
   border-bottom: 1px solid var(--color-border) !important;
@@ -1012,8 +1024,721 @@ body {
   background: var(--color-bg-container);
 }
 
+/* ---------- 6. 动作按钮 / 操作标签 / 状态标签 / 轻提示 / 图标工具条 ---------- */
+
+/* 页面工具条 */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.toolbar .btn {
+  min-width: 64px;
+}
+
+.btn-warning {
+  background: var(--color-action-warning);
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background: #f98a55;
+}
+
+.btn-warning:active {
+  background: #d95f22;
+}
+
+.btn-hold {
+  background: var(--color-action-hold);
+  color: #fff;
+}
+
+.btn-hold:hover {
+  background: #fbbd47;
+}
+
+.btn-hold:active {
+  background: #e09612;
+}
+
+.btn-custom {
+  background: var(--color-action-custom);
+  color: #fff;
+}
+
+.btn-custom:hover {
+  background: #3ed5e0;
+}
+
+.btn-custom:active {
+  background: #0ea8b6;
+}
+
+.btn-success {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #22c93f;
+}
+
+.btn-success:active {
+  background: #00961f;
+}
+
+.btn-neutral {
+  background: var(--color-action-neutral);
+  color: #fff;
+}
+
+.btn-neutral:hover {
+  background: #9c9c9c;
+}
+
+.btn-neutral:active {
+  background: #737373;
+}
+
+/* 操作标签 Chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 8px;
+  margin: 0 6px 6px 0;
+  border-radius: var(--radius-md);
+  border: 1px solid #e4ecfe;
+  background: #f6faff;
+  color: var(--color-primary);
+  font-size: var(--font-size-aux);
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration),
+    border-color var(--duration);
+}
+
+.chip:hover {
+  background: #ebf2ff;
+  border-color: #cddffd;
+}
+
+.chip-orange {
+  color: #f67437;
+  background: #fff7f2;
+  border-color: #fae6dd;
+}
+
+.chip-orange:hover {
+  background: #ffefe6;
+  border-color: #f7d3c2;
+}
+
+.chip-red {
+  color: #f53f3f;
+  background: #fff5f5;
+  border-color: #fdebeb;
+}
+
+.chip-red:hover {
+  background: #ffebeb;
+  border-color: #fbd5d5;
+}
+
+.chip-teal {
+  color: #20bc98;
+  background: #edfcf8;
+  border-color: #e0f6f1;
+}
+
+.chip-teal:hover {
+  background: #e2f8f2;
+  border-color: #c4ede3;
+}
+
+.chip-green {
+  color: #00b42a;
+  background: #f5fcf4;
+  border-color: #dff2dd;
+}
+
+.chip-green:hover {
+  background: #ecf9ea;
+  border-color: #cbe9c7;
+}
+
+.chip-sky {
+  color: #2e9bf0;
+  background: #f6faff;
+  border-color: #e3f1fd;
+}
+
+.chip-sky:hover {
+  background: #ecf5fe;
+  border-color: #cde6fb;
+}
+
+.chip-gray {
+  color: #898989;
+  background: #fafafa;
+  border-color: #ececec;
+}
+
+.chip-gray:hover {
+  background: #f2f2f2;
+  border-color: #e0e0e0;
+}
+
+.chip.is-disabled,
+.chip-static {
+  color: var(--color-text-disabled);
+  background: var(--color-bg-container);
+  border-color: var(--color-border);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* 状态标签 */
+.state-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid;
+  font-size: var(--font-size-aux);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.state-teal {
+  color: #20bc98;
+  background: #edfcf8;
+  border-color: #d2f2e9;
+}
+
+.state-sky {
+  color: #2e9bf0;
+  background: #f6faff;
+  border-color: #d8ecfd;
+}
+
+.state-orange {
+  color: #f67437;
+  background: #fceee8;
+  border-color: #f9dbcd;
+}
+
+.state-gray {
+  color: #ababab;
+  background: #f1f1f1;
+  border-color: #e8e8e8;
+}
+
+.state-red {
+  color: #e04303;
+  background: #fbece5;
+  border-color: #f7d7c8;
+}
+
+.state-blue {
+  color: #3370ff;
+  background: #ebf1fe;
+  border-color: #d5e2fd;
+}
+
+/* 轻提示 */
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  width: 100%;
+}
+
+.toast-success {
+  background: #e6f9f4;
+  color: #0fb98e;
+}
+
+.toast-error {
+  background: #ffe7e3;
+  color: #ff3e1f;
+}
+
+.toast-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1fd8ad;
+  color: #fff;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.toast-error .toast-icon {
+  background: #ff3e1f;
+}
+
+/* 图标按钮与工具条 */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-container);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background-color var(--duration),
+    border-color var(--duration),
+    color var(--duration);
+}
+
+.icon-btn:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.icon-btn-primary {
+  color: var(--color-primary);
+  border-color: #c7d8ff;
+}
+
+.icon-btn-primary:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.icon-btn-sm {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+/* 进度条 */
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.progress-row + .progress-row {
+  margin-top: 16px;
+}
+
+.progress {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 80px;
+  max-width: 320px;
+  height: 8px;
+  border-radius: 999px;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.progress-bar {
+  position: relative;
+  height: 100%;
+  width: var(--value, 0%);
+  border-radius: inherit;
+  overflow: hidden;
+  background: var(--color-primary);
+  transition:
+    width 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms linear;
+  animation: progress-grow 720ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* 进行中：斜向流光，暗示任务仍在推进 */
+.progress-bar.is-active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 25%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  background-size: 220% 100%;
+  animation: progress-sheen 1.8s linear infinite;
+}
+
+/* 完成态：保持品牌蓝，仅停止动效 */
+.progress-bar.is-success {
+  background: var(--color-primary);
+  animation: none;
+}
+
+.progress-bar.is-success::after {
+  animation: none;
+  opacity: 0;
+}
+
+/* 不确定态：一段 30% 的滑块往返，用于无法预知耗时的任务 */
+.progress.is-indeterminate .progress-bar {
+  width: 30%;
+  animation: progress-indeterminate 1.4s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
+  animation-delay: -700ms; /* 从周期中段开始，避免首帧空白 */
+}
+
+.progress-text {
+  flex: 0 0 auto;
+  min-width: 42px;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+
+/* 完成态文字与常规一致（品牌蓝进度条不随状态变色） */
+
+@keyframes progress-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--value, 0%);
+  }
+}
+
+@keyframes progress-sheen {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes progress-indeterminate {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(340%);
+  }
+}
+
+/* 选项控件 */
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: var(--font-size-aux);
+  color: var(--color-text-secondary);
+}
+
+.radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.radio-empty {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+}
+
+.check-box {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.check-empty {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+/* ---------- 空状态 ---------- */
+.spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-twinkle 2.8s ease-in-out infinite;
+}
+
+.paper {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-float 7s ease-in-out infinite;
+}
+
+.rocket-float {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-float 4.6s ease-in-out infinite;
+}
+
+@keyframes art-twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes art-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 48px 24px;
+  min-height: 260px;
+  background: var(--color-bg-container);
+}
+
+.empty-art {
+  flex: 0 0 auto;
+  width: 208px;
+  max-width: 38%;
+  height: auto;
+}
+
+.empty-title {
+  margin: 0;
+  font-size: var(--font-size-page);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  color: var(--color-text-primary);
+}
+
+.empty-desc {
+  margin: 8px 0 0;
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+  color: var(--color-info);
+}
+
+.empty-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.empty-state .btn {
+  text-decoration: none;
+}
+
+/* 文档正文里的链接样式会覆盖按钮文字色，这里强制还原 */
+.vp-doc a.btn {
+  border-bottom: none;
+  text-decoration: none;
+}
+
+.vp-doc a.btn-primary,
+.vp-doc a.btn-primary:hover {
+  color: #fff;
+}
+
+.vp-doc a.btn-default,
+.vp-doc a.btn-default:hover {
+  color: var(--color-text-primary);
+}
+
+/* 表格内嵌的紧凑空状态 */
+.empty-state.is-compact {
+  gap: 24px;
+  padding: 32px 24px;
+  min-height: 200px;
+}
+
+.empty-state.is-compact .empty-art {
+  width: 132px;
+}
+
+.empty-state.is-compact .empty-title {
+  font-size: var(--font-size-module);
+}
+
+/* ---------- 异常页（404 / 403 / 500） ---------- */
+.exception-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  width: 100%;
+  max-width: 880px;
+  min-height: calc(100vh - 200px);
+  margin: 0 auto;
+  padding: 72px 24px;
+  box-sizing: border-box;
+}
+
+.exception-art {
+  flex: 0 0 auto;
+  width: 300px;
+  max-width: 44%;
+  height: auto;
+}
+
+.exception-body {
+  min-width: 0;
+}
+
+.exception-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.2px;
+  color: var(--color-text-primary);
+}
+
+.exception-desc {
+  margin: 10px 0 0;
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+  color: var(--color-info);
+}
+
+.exception-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.exception-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 200ms;
+}
+
+.exception-btn:hover {
+  background: var(--color-primary-hover);
+}
+
+.exception-btn:active {
+  background: var(--color-primary-active);
+}
+
+.exception-link {
+  font-size: var(--font-size-body);
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms;
+}
+
+.exception-link:hover {
+  border-bottom-color: var(--color-primary);
+}
+
+/* 内嵌在文档演示里的异常页：去掉大留白 */
+.exception-view.is-embedded {
+  min-height: 0;
+  padding: 32px 24px;
+  gap: 40px;
+}
+
+.exception-view.is-embedded .exception-art {
+  width: 240px;
+}
+
 /* 小屏适配 */
 @media (max-width: 768px) {
+  .empty-state,
+  .exception-view {
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    padding: 32px 20px;
+    text-align: center;
+  }
+
+  .exception-body {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .exception-desc,
+  .empty-desc {
+    overflow-wrap: break-word;
+  }
+
+  .empty-art,
+  .exception-art {
+    width: 160px;
+    max-width: 60%;
+  }
+
+  .empty-actions,
+  .exception-actions {
+    justify-content: center;
+  }
+
+  .exception-title {
+    font-size: 22px;
+  }
+
   .demo-stage {
     padding: 16px;
   }
@@ -1026,5 +1751,23 @@ body {
   .type-label,
   .type-spec {
     flex: 0 0 auto;
+  }
+}
+
+/* 尊重系统「减少动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar,
+  .progress-bar::after,
+  .progress.is-indeterminate .progress-bar,
+  .spark,
+  .rocket-float,
+  .paper {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .progress-bar.is-indeterminate,
+  .progress.is-indeterminate .progress-bar {
+    transform: none;
   }
 }

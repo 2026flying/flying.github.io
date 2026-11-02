@@ -27,7 +27,58 @@ title: 按钮 Button
 | 次按钮 | 白底灰边 | 取消、关闭、次要操作 |
 | 危险按钮 | 红底白字 | 删除、批量移除等不可逆操作 |
 
-## 6.1.2 状态
+## 6.1.2 动作色板
+
+业务工具条的按钮**文案与颜色都是固定的**，同类动作跨页面必须同色。
+
+<div class="demo">
+  <div class="demo-label">toolbar / action-palette</div>
+  <div class="demo-stage">
+    <div class="toolbar">
+      <button class="btn btn-primary">查询</button>
+      <button class="btn btn-warning">重置</button>
+      <button class="btn btn-custom">自定义按钮</button>
+      <button class="btn btn-neutral">取消</button>
+      <button class="btn btn-hold">暂存</button>
+      <button class="btn btn-warning">退回</button>
+      <button class="btn btn-primary">通过</button>
+      <button class="btn btn-success">撤回</button>
+      <button class="btn btn-primary">催办</button>
+      <button class="btn btn-primary">打印</button>
+      <button class="btn btn-danger">关闭</button>
+      <button class="btn btn-danger">删除</button>
+    </div>
+  </div>
+  <div class="demo-note">排列顺序：查询 → 重置 → 自定义 在最左，关闭 / 删除 在最后。</div>
+</div>
+
+| 按钮 | 语义 | Token | 形态 |
+| --- | --- | --- | --- |
+| 查询 | 检索 | `--color-primary` | 实心 |
+| 重置 | 清空条件 | `--color-action-warning` | 实心 |
+| 自定义按钮 | 扩展入口 | `--color-action-custom` | 实心 |
+| 取消 | 放弃编辑 | `--color-action-neutral` | 实心 |
+| 暂存 | 保存未提交 | `--color-action-hold` | 实心 |
+| 退回 | 退回上一节点 | `--color-action-warning` | 实心 |
+| 通过 | 审批通过 | `--color-primary` | 实心 |
+| 撤回 | 撤回已发流程 | `--color-success` | 实心 |
+| 催办 | 催办 | `--color-primary` | 实心 |
+| 打印 | 打印 | `--color-primary` | 实心 |
+| 关闭 | 关闭流程 | `--color-danger` | 实心 |
+| 删除 | 删除 | `--color-danger` | 实心 |
+
+<ul class="rules">
+  <li class="must">动作色只允许上表 7 种，禁止为新按钮新造颜色。</li>
+  <li class="must">排列顺序固定：<code>查询 → 重置 → 自定义</code> 在最左，<code>关闭 / 删除</code> 在最后。</li>
+  <li class="must">红色破坏性按钮在同一工具条内不超过 2 个。</li>
+  <li class="recommend">实心按钮只出现在页面工具条与弹窗底部，不得进入表格单元格。</li>
+</ul>
+
+::: warning 与「最多一个主按钮」的冲突
+上文约束「同一区域最多一个主按钮」针对的是**内容区**（弹窗底部、卡片、表单）。工具条属于检索与流程操作区，允许「查询 + 1 个主动作」同为蓝色；其余动作需降级为白底灰边的次按钮或改用 [Chip](/components/chip) 形态。
+:::
+
+## 6.1.3 状态
 
 状态必须全覆盖 `default`、`hover`、`active`、`disabled`、`loading`。下表为强制要求，缺任意一项即为缺陷。
 
@@ -57,7 +108,7 @@ title: 按钮 Button
   <li class="must">禁用态不能只降低透明度，需同时改背景与文字色，保证可读。</li>
 </ul>
 
-## 6.1.3 使用约束
+## 6.1.4 使用约束
 
 <ul class="rules">
   <li class="must">同一区域最多只能有一个主按钮。</li>
@@ -75,7 +126,7 @@ title: 按钮 Button
   </div>
 </div>
 
-## 6.1.4 代码
+## 6.1.5 代码
 
 ```css
 .btn {
