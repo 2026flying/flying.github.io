@@ -7,7 +7,6 @@ title: 规范总览
 <div class="spec-meta">
   <span>版本：<b>v0.1</b></span>
   <span>更新日期：<b>2026-11-02</b></span>
-  <span>维护人：<b>待填写</b></span>
   <span>适用端：<b>Web 端（PC 浏览器）</b></span>
 </div>
 
