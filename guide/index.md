@@ -22,7 +22,6 @@ title: 规范总览
 | 适用角色 | UI 设计师、前端开发、测试、产品经理 |
 | 源文件 | `公司产品 UI 设计规范.md` |
 
-**v0.1 变更**：新增 [6.9 进度条](/components/progress)（流光 / 完成 / 不确定态）、[6.10 空状态](/components/empty-state)、[6.11 异常页](/components/exception)；修订 [6.3 表格](/components/table) 表头字号（12px → 14px/600，禁止小于表体）、[3.3 字号约束](/foundation/typography#33-使用约束) 同步调整。
 
 ## 强制等级图例
 

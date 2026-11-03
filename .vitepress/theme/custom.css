@@ -908,15 +908,160 @@ body {
 }
 
 .data-table .col-action {
-  text-align: right;
+
   white-space: nowrap;
 }
 
 .data-table .col-action a {
-  margin-left: 12px;
+  margin-right: 12px;
   border-bottom: none;
   font-size: var(--font-size-body);
 }
+
+/* ---------- 业务表：流程列表（9 列） ---------- */
+/* 表头取近白 #FAFAFA，靠字重与 1px 底边区分，不用 #F2F3F5 深灰底 */
+.data-table.is-flow th {
+  height: 50px;
+  padding: 0 16px !important;
+  background: #fafafa !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.data-table.is-flow td {
+  height: 50px;
+  padding: 0 16px !important;
+  border-bottom: 1px solid #f2f3f5 !important;
+  vertical-align: middle;
+}
+
+.data-table.is-flow .col-index {
+  width: 60px;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table.is-flow .cell-title a {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.data-table.is-flow .cell-title a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.data-table.is-flow .cell-time {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+/* 表格内状态标签：比正文标签高一档，保证 50px 行高下的视觉权重 */
+.data-table.is-flow .state-tag {
+  height: 26px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* 行内进度：轨道 156×10，右侧 12px 百分比，100% 仍为品牌蓝 */
+.data-table.is-flow .cell-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 208px;
+}
+
+.data-table.is-flow .cell-progress .progress {
+  flex: 0 0 156px;
+  width: 156px;
+  height: 10px;
+}
+
+.data-table.is-flow .cell-progress .progress-text {
+  min-width: 38px;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* 操作列：≤3 项文字按钮，次要灰、主动作蓝，间距 16px */
+.data-table.is-flow .col-action {
+  width: 168px;
+  position: sticky;
+  right: 0;
+  background: var(--color-bg-container);
+  text-align: left;
+}
+
+.data-table.is-flow tbody tr:hover .col-action {
+  background: var(--color-bg-hover);
+}
+
+.row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.row-actions .act {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--font-size-body);
+  line-height: 1;
+  color: var(--color-info);
+  cursor: pointer;
+}
+
+.row-actions .act:hover {
+  color: var(--color-primary);
+}
+
+.row-actions .act-primary {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* 9 列在窄容器内横向滚动，操作列吸附右侧 */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.table-scroll .data-table {
+  min-width: 1120px;
+}
+
+/* 通栏演示：宽表需要超过正文 688px 的宽度，向右借用页面留白 */
+.demo.is-bleed {
+  width: calc(100vw - 352px);
+  max-width: 1200px;
+}
+
+@media (max-width: 1280px) {
+  .demo.is-bleed {
+    width: 100%;
+  }
+}
+
+/* 业务表单元格不换行，靠列宽与横向滚动消化 */
+.data-table.is-flow td,
+.data-table.is-flow th {
+  white-space: nowrap;
+}
+
+.data-table.is-flow .cell-title {
+  min-width: 240px;
+}
+
+
 
 .tag {
   display: inline-block;
@@ -1548,7 +1693,9 @@ body {
   max-width: 38%;
   height: auto;
 }
-
+.empty-body{
+  text-align: left;
+}
 .empty-title {
   margin: 0;
   font-size: var(--font-size-page);
