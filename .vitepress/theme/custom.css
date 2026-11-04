@@ -113,7 +113,9 @@
 
   --vp-sidebar-item-active-bg: #e1eaff;
 }
-
+.VPNav{
+  background-color: #fff;
+}
 /* ---------- 3. 站点框架样式 ---------- */
 @media (min-width: 960px) {
     .VPNavBar.has-sidebar .wrapper[data-v-84a11e99] {
