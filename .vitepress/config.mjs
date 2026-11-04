@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   lang: 'zh-CN',
   title: 'UI 设计规范',
-  description: '公司产品 UI 设计规范 v0.1 —— 统一设计语言与前端实现标准',
+  description: '公司产品 UI 设计规范 v0.6 —— 统一设计语言与前端实现标准',
 
   // 规范只定义浅色主题，站点固定为浅色，避免阅读时与规范色值产生偏差
   appearance: false,
@@ -28,7 +28,7 @@ export default defineConfig({
       { text: '设计基础', link: '/foundation/color', activeMatch: '^/foundation/' },
       { text: '组件', link: '/components/button', activeMatch: '^/components/' },
       { text: '资源', link: '/resources/trae-rules', activeMatch: '^/resources/' },
-      { text: 'v0.1', link: '/guide/#版本信息' }
+      { text: 'v0.6', link: '/guide/#版本信息' }
     ],
 
     sidebar: [
@@ -54,6 +54,8 @@ export default defineConfig({
         text: '组件规范',
         collapsed: false,
         items: [
+          { text: '全局组件 Global', link: '/components/navigation' },
+          { text: '列表页 Templates', link: '/components/list-page' },
           { text: '按钮 Button', link: '/components/button' },
           { text: '表单 Form', link: '/components/form' },
           { text: '表格 Table', link: '/components/table' },
@@ -116,7 +118,7 @@ export default defineConfig({
 
     footer: {
       message: '本文件是规范的唯一源文件，Trae 规则与前端 Token 均由此派生。',
-      copyright: '公司产品 UI 设计规范 · v0.1'
+      copyright: '公司产品 UI 设计规范 · v0.6'
     },
 
     socialLinks: []

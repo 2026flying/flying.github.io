@@ -38,6 +38,10 @@
   --color-bg-page: #f2f3f5;
   --color-bg-container: #ffffff;
   --color-bg-hover: #f7f8fa;
+  /* 浅蓝悬停：表格行、侧边菜单、分组标题、页签、一般列表行统一用它 */
+  --color-bg-hover-blue: #e6f3fe;
+  /* 表格行悬停（语义别名，等同 --color-bg-hover-blue） */
+  --color-table-row-hover: var(--color-bg-hover-blue);
 
   /* 字体 */
   --font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
@@ -87,7 +91,7 @@
 
   --vp-c-bg: #ffffff;
   --vp-c-bg-alt: #f7f8fa;
-  --vp-c-bg-soft: #f7f8fa;
+  --vp-c-bg-soft: #f9f9f9;
   --vp-c-bg-elv: #ffffff;
 
   --vp-font-family-base: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
@@ -111,6 +115,12 @@
 }
 
 /* ---------- 3. 站点框架样式 ---------- */
+@media (min-width: 960px) {
+    .VPNavBar.has-sidebar .wrapper[data-v-84a11e99] {
+        padding: 0;
+        background-color: #fff;
+    }
+}
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -904,7 +914,7 @@ body {
 }
 
 .data-table tbody tr:hover td {
-  background: var(--color-bg-hover);
+  background: var(--color-table-row-hover);
 }
 
 .data-table .col-action {
@@ -938,6 +948,7 @@ body {
   width: 60px;
   color: var(--color-text-secondary);
   font-variant-numeric: tabular-nums;
+  text-align: center;
 }
 
 .data-table.is-flow .cell-title a {
@@ -998,7 +1009,7 @@ body {
 }
 
 .data-table.is-flow tbody tr:hover .col-action {
-  background: var(--color-bg-hover);
+  background: var(--color-table-row-hover);
 }
 
 .row-actions {
@@ -1850,8 +1861,1291 @@ body {
   width: 240px;
 }
 
+/* ==========================================================================
+   导航框架（全局组件 AppShell）
+   side 侧边导航 / top 顶部导航 / mixed 混合导航，可叠加 tabs 页签
+   ========================================================================== */
+.app-shell {
+  --as-header-h: 56px;
+  --as-top-h: 44px;
+  --as-tabs-h: 40px;
+  --as-side-w: 232px;
+  --as-side-w-min: 64px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 760px;
+  overflow: hidden;
+  background: var(--color-bg-page);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+}
+
+/* 演示外壳：给导航框架留出边距，窄屏时可横向滚动而不挤压布局 */
+.nav-demo-scroll {
+  overflow-x: auto;
+  padding: 12px;
+  background: var(--color-bg-page);
+}
+
+.nav-demo-scroll .app-shell {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.nav-demo-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.nav-demo-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+/* ---------- 顶栏 ---------- */
+/* 背景图为「左白 → 右蓝」渐变，右对齐保证右侧工具始终落在蓝底上，图标与文字用白色 */
+.as-header {
+  flex: 0 0 var(--as-header-h);
+  height: var(--as-header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 0 20px;
+  background-color: var(--color-bg-container);
+  background-image: var(--as-header-bg, none);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* 有蓝色一级导航条时不需要分割线，避免浅灰线压在蓝条上 */
+.app-shell.is-top .as-header,
+.app-shell.is-mixed .as-header {
+  border-bottom: 0;
+}
+
+.as-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 系统 logo 自带中英文名称，高度取 30px，宽度按比例 */
+.as-logo {
+  display: block;
+  width: auto;
+  height: 30px;
+}
+
+.as-tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.as-tool {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background var(--duration), color var(--duration);
+}
+
+.as-tool:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.as-badge {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 8px;
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 15px;
+  text-align: center;
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85);
+}
+
+.as-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 8px 0 4px;
+  margin-left: 6px;
+  border-radius: 18px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.as-user:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.as-avatar {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.as-user-name {
+  font-size: 13px;
+  color: #fff;
+}
+
+/* ---------- 顶部一级导航 ---------- */
+.as-topnav {
+  flex: 0 0 var(--as-top-h);
+  height: var(--as-top-h);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 8px;
+  background: var(--color-primary);
+  overflow: hidden;
+}
+
+.as-menu {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--duration), color var(--duration);
+}
+
+.as-menu:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.as-menu.is-active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 500;
+}
+
+.as-menu-more {
+  margin-left: auto;
+  padding: 0 8px;
+}
+
+/* ---------- 主体 ---------- */
+.as-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* ---------- 侧边导航 ---------- */
+.as-side {
+  flex: 0 0 var(--as-side-w);
+  width: var(--as-side-w);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-container);
+  border-right: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: width var(--duration) ease, flex-basis var(--duration) ease;
+}
+
+.as-side-scroll {
+  flex: 1;
+  min-height: 0;
+  padding: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.as-side-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.as-side-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+.as-group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  margin: 2px 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--duration), color var(--duration);
+}
+
+.as-group-head:hover {
+  background: var(--color-bg-hover-blue);
+  color: var(--color-text-primary);
+}
+
+.as-chev {
+  margin-left: auto;
+  transition: transform var(--duration);
+}
+
+.as-group-head.is-open .as-chev {
+  transform: rotate(180deg);
+}
+
+.as-group-body {
+  overflow: hidden;
+}
+
+.as-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 10px;
+  margin: 2px 0;
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background var(--duration), color var(--duration);
+}
+
+.as-item:hover {
+  background: var(--color-bg-hover-blue);
+}
+
+.as-item:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* 选中项整行高亮，与截图一致（通栏到侧栏两边） */
+.as-item.is-active {
+  margin: 2px -8px;
+  padding: 0 18px;
+  border-radius: 0;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 500;
+}
+
+.as-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.as-side-foot {
+  flex: 0 0 auto;
+  padding: 6px;
+  border-top: 1px solid var(--color-border);
+}
+
+.as-collapse {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--duration), color var(--duration);
+}
+
+.as-collapse:hover {
+  background: var(--color-bg-hover-blue);
+  color: var(--color-primary);
+}
+
+/* 收起态：只留图标轨道 */
+.app-shell.is-collapsed .as-side {
+  flex-basis: var(--as-side-w-min);
+  width: var(--as-side-w-min);
+}
+
+.app-shell.is-collapsed .as-side-scroll {
+  padding: 8px 6px;
+}
+
+.app-shell.is-collapsed .as-group-head {
+  display: none;
+}
+
+.app-shell.is-collapsed .as-item {
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  margin: 2px 0;
+  border-radius: 6px;
+}
+
+.app-shell.is-collapsed .as-item.is-active {
+  margin: 2px 0;
+  padding: 0;
+  border-radius: 6px;
+}
+
+.app-shell.is-collapsed .as-label,
+.app-shell.is-collapsed .as-chev {
+  display: none;
+}
+
+.app-shell.is-collapsed .as-collapse {
+  justify-content: center;
+  padding: 0;
+}
+
+/* ---------- 页签 ---------- */
+.as-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-page);
+}
+
+.as-tabs {
+  flex: 0 0 var(--as-tabs-h);
+  height: var(--as-tabs-h);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  background: var(--color-bg-container);
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.as-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.as-tab-home {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: var(--color-bg-page);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--duration), background var(--duration);
+}
+
+.as-tab-home:hover {
+  background: var(--color-bg-hover-blue);
+  color: var(--color-primary);
+}
+
+.as-tab {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 29px;
+  padding: 0 7px 0 10px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--duration), color var(--duration);
+}
+
+.as-tab:hover {
+  background: var(--color-bg-hover-blue);
+  color: var(--color-text-primary);
+}
+
+.as-tab.is-active {
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.as-tab-x {
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  color: var(--color-text-disabled);
+  transition: background var(--duration), color var(--duration);
+}
+
+.as-tab.is-active .as-tab-x {
+  color: var(--color-text-secondary);
+}
+
+.as-tab-x:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--color-text-primary);
+}
+
+/* ---------- 内容区 ---------- */
+.as-content {
+  flex: 1;
+  min-height: 0;
+  padding: 14px 16px;
+  overflow: auto;
+  background-color: #ECF3FC;
+}
+
+.as-crumb {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.as-panel {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-container);
+  box-shadow: var(--shadow-card);
+}
+
+.as-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.as-panel-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.as-panel-hint {
+  font-size: 12px;
+  color: var(--color-text-disabled);
+}
+
+.as-skel {
+  height: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #f2f3f5;
+}
+
+.as-skel.is-block {
+  height: 96px;
+  margin-top: 16px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #f7f8fa, #f2f3f5);
+}
+
+/* ---------- 页面模板（列表页：表格页 / 一般列表 / 卡片列表） ---------- */
+.pg-case {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pg-card {
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-container);
+  box-shadow: var(--shadow-card);
+}
+
+.pg-card.is-flush {
+  padding: 0;
+  overflow: hidden;
+}
+
+.pg-card.is-flush > .pg-card-head {
+  padding: 12px 16px 8px;
+  margin-bottom: 0;
+}
+
+/* 表格左右各留 16px（与卡头标题、分页同边距）：表头底色、悬停行都不再顶到卡片边缘 */
+.pg-card.is-flush > .table-scroll {
+  padding: 0 16px;
+}
+
+.pg-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pg-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.pg-title .as-ico {
+  color: var(--color-primary);
+}
+
+.pg-sub {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.pg-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.pg-tool {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-container);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    color var(--duration),
+    border-color var(--duration);
+}
+
+.pg-tool:hover {
+  background: var(--color-bg-hover-blue);
+  color: var(--color-primary);
+  border-color: var(--color-primary-hover);
+}
+
+/* 筛选区 */
+.pg-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pg-frow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pg-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.pg-field > span:first-child {
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.pg-field.is-grow {
+  flex: 1 1 300px;
+}
+
+.pg-field.is-grow .pg-input {
+  flex: 1 1 0;
+  width: auto;
+}
+
+.pg-input {
+  width: 176px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-container);
+  font-family: var(--font-family);
+  font-size: 13px;
+  color: var(--color-text-primary);
+  transition:
+    border-color var(--duration),
+    box-shadow var(--duration);
+}
+
+.pg-input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.pg-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(51, 112, 255, 0.12);
+}
+
+.pg-date {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pg-date .pg-input {
+  width: 148px;
+  padding-right: 30px;
+}
+
+.pg-date .as-ico {
+  position: absolute;
+  right: 9px;
+  color: var(--color-text-disabled);
+  pointer-events: none;
+}
+
+.pg-tilde {
+  font-style: normal;
+  color: var(--color-text-disabled);
+}
+
+.pg-factions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* 筛选条件单行排布：收窄输入与日期，行尾放操作按钮；放不下时才换行 */
+.pg-filter.is-row .pg-frow {
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.pg-filter.is-row .pg-field.is-grow {
+  flex: 1 1 110px;
+  min-width: 0;
+}
+
+.pg-filter.is-row .pg-input {
+  width: 100px;
+}
+
+.pg-filter.is-row .pg-field.is-grow .pg-input {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 120px;
+}
+
+.pg-filter.is-row .pg-date .pg-input {
+  width: 94px;
+}
+
+.pg-filter.is-row .pg-factions {
+  flex: 0 0 auto;
+}
+
+/* 窄容器放不下一行时退回换行，不挤压控件 */
+@media (max-width: 1280px) {
+  .pg-filter.is-row .pg-frow {
+    flex-wrap: wrap;
+  }
+
+  .pg-filter.is-row .pg-field.is-grow {
+    flex: 1 1 240px;
+  }
+}
+
+/* 表格页：沿用 6.3 表格规范，单元格略收内边距以容纳 7 列 */
+.pg-case .table-scroll .data-table.pg-dt {
+  width: 100%;
+  min-width: 860px;
+  margin: 0; /* 压掉 .vp-doc table 的外边距，卡头与表头不留空档 */
+  table-layout: fixed;
+}
+
+.data-table.pg-dt th,
+.data-table.pg-dt td {
+  padding: 0 12px !important;
+}
+
+/* 行高 38px：表头与表体同高，信息密度与 6.2.2 一般列表一致 */
+.data-table.pg-dt th,
+.data-table.pg-dt td {
+  height: 38px;
+}
+
+/* 表体 13px，表头保持 14px / 600（6.5 强制项：表头不得小于表体） */
+.data-table.pg-dt td {
+  font-size: 13px;
+}
+
+/* 标题列用次要文字色（同 6.2.2 列表标题），悬停转品牌蓝；仍保留链接语义 */
+.data-table.pg-dt .cell-title a {
+  color: var(--color-text-secondary);
+}
+
+.data-table.pg-dt .cell-title a:hover {
+  color: var(--color-primary);
+}
+
+.data-table.pg-dt .col-cell,
+.data-table.pg-dt .cell-title a,
+.data-table.pg-dt .row-actions .act,
+.data-table.pg-dt .col-action a {
+  font-size: 13px;
+}
+
+/* 序号列：表头与数字一起居中，右对齐会与左侧 16px 边距错位 */
+.data-table.pg-dt .col-index {
+  text-align: center;
+}
+
+/* 列宽固定：标题吃掉剩余宽度并省略，置顶列不再被吸右的操作列覆盖 */
+.data-table.pg-dt th:nth-child(1) {
+  width: 56px;
+}
+
+.data-table.pg-dt th:nth-child(3) {
+  width: 84px;
+}
+
+.data-table.pg-dt th:nth-child(4) {
+  width: 104px;
+}
+
+.data-table.pg-dt th:nth-child(5) {
+  width: 108px;
+}
+
+.data-table.pg-dt th:nth-child(6) {
+  width: 88px;
+}
+
+.data-table.pg-dt th:nth-child(7) {
+  width: 152px;
+}
+
+.data-table.pg-dt .cell-title a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-table.pg-dt .is-center {
+  text-align: center;
+}
+
+.data-table.pg-dt tbody tr:hover td {
+  background: var(--color-table-row-hover) !important;
+}
+
+.pg-dt .row-actions {
+  gap: 12px;
+}
+
+/* ---------- 人员档案宽表（6.2.2 补充示例） ---------- */
+.pg-staff-wrap {
+  padding: 12px 16px;
+}
+
+.pg-case .table-scroll .data-table.pg-staff {
+  width: 100%;
+  min-width: 1376px;
+  margin: 0;
+  table-layout: fixed;
+}
+
+/* 宽表不留网格：清掉 VitePress 默认的 1px 四边框，只保留横向分割线 #F2F3F5 */
+.data-table.pg-staff th,
+.data-table.pg-staff td {
+  height: 38px;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #f2f3f5 !important;
+  font-size: 13px;
+}
+
+.data-table.pg-staff th {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.data-table.pg-staff .col-index {
+  width: 56px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 列宽固定：11 列横向滚动，操作列吸右不被挤压 */
+.data-table.pg-staff th:nth-child(2) {
+  width: 112px;
+}
+
+.data-table.pg-staff th:nth-child(3) {
+  width: 88px;
+}
+
+.data-table.pg-staff th:nth-child(4) {
+  width: 118px;
+}
+
+.data-table.pg-staff th:nth-child(5) {
+  width: 102px;
+}
+
+.data-table.pg-staff th:nth-child(6) {
+  width: 136px;
+}
+
+.data-table.pg-staff th:nth-child(7) {
+  width: 180px;
+}
+
+.data-table.pg-staff th:nth-child(8) {
+  width: 96px;
+}
+
+.data-table.pg-staff th:nth-child(9) {
+  width: 100px;
+}
+
+.data-table.pg-staff th:nth-child(10) {
+  width: 120px;
+}
+
+.data-table.pg-staff th:nth-child(11),
+.data-table.pg-staff .col-action {
+  width: 268px;
+}
+
+/* 吸右的操作列压住被滚走的列，只留左侧淡投影交代「下面还有内容」，不画竖线 */
+.data-table.pg-staff .col-action {
+  border-left: 0 !important;
+  box-shadow: -12px 0 16px -8px rgba(29, 33, 41, 0.22);
+}
+
+.data-table.pg-staff .cell-date,
+.data-table.pg-staff .cell-tel {
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table.pg-staff tbody tr:hover td,
+.data-table.pg-staff tbody tr:hover .col-action {
+  background: var(--color-table-row-hover) !important;
+}
+
+/* 行内操作 4 项：22px 描边小按钮，颜色只表达语义，填充恒为白底 */
+.pg-staff .row-actions.is-outline {
+  gap: 8px;
+}
+
+.pg-staff .op {
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-container);
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--duration),
+    border-color var(--duration),
+    color var(--duration);
+}
+
+.pg-staff .op-primary {
+  color: var(--color-primary);
+  border-color: #bedaff;
+}
+
+.pg-staff .op-danger {
+  color: var(--color-danger);
+  border-color: #fbaca3;
+}
+
+.pg-staff .op-success {
+  color: var(--color-success);
+  border-color: #aff0b5;
+}
+
+.pg-staff .op-warning {
+  color: var(--color-warning);
+  border-color: #ffd591;
+}
+
+.pg-staff .op-primary:hover {
+  background: #f2f6ff;
+}
+
+.pg-staff .op-danger:hover {
+  background: #fff2f2;
+}
+
+.pg-staff .op-success:hover {
+  background: #f0fff2;
+}
+
+.pg-staff .op-warning:hover {
+  background: #fff8eb;
+}
+
+/* 分页 */
+.pg-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  border-top: 1px solid #f2f3f5;
+}
+
+.pg-pager-btns {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pg-page-btn {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-container);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    color var(--duration),
+    border-color var(--duration),
+    background-color var(--duration);
+}
+
+.pg-page-btn:hover {
+  background: var(--color-bg-hover-blue);
+  color: var(--color-primary);
+  border-color: var(--color-primary-hover);
+}
+
+.pg-page-btn.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.pg-pager-info {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 一般列表 */
+.pg-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* 单栏形态（6.2.2 一般列表）：一张卡满宽 */
+.pg-split.is-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* 提权到 .pg-case 下，压过 .vp-doc ul（padding-left 1.25rem / margin 16px）
+   与 .vp-doc li + li（margin-top 8px），否则列表会缩进且行间出现 8px 空白 */
+.pg-case .pg-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.pg-case .pg-list > .pg-list-row {
+  margin: 0;
+}
+
+.pg-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 38px;
+  padding: 0;
+  border-bottom: 1px solid #f2f3f5;
+  border-radius: var(--radius-md);
+  transition: background var(--duration);
+}
+
+/* 行悬停：铺满整行 38px，行与行之间不留缝 */
+.pg-case .pg-list-row:hover {
+  background: var(--color-bg-hover-blue);
+}
+
+.pg-case .pg-list-row:last-child {
+  border-bottom: 0;
+}
+
+.pg-list-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.pg-list-row:last-child {
+  border-bottom: 0;
+}
+
+.pg-case .pg-list-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+.pg-case .pg-list-title:hover {
+  color: var(--color-primary);
+}
+
+.pg-new {
+  flex: 0 0 auto;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 1;
+  color: var(--color-danger);
+}
+
+.pg-list-time {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.pg-list-row .state-tag {
+  flex: 0 0 auto;
+  height: 20px;
+  line-height: 20px;
+  font-size: 11px;
+}
+
+/* 卡片列表 */
+.pg-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pg-grid-3.is-rows {
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.pg-case .pg-todo,
+.pg-case .pg-todo:hover,
+.pg-case .pg-count-row,
+.pg-case .pg-count-row:hover {
+  border-bottom: 0;
+}
+
+.pg-todo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 62px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  color: #fff;
+  text-decoration: none;
+  transition:
+    transform var(--duration),
+    box-shadow var(--duration),
+    filter var(--duration);
+}
+
+.pg-todo:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 4px 12px rgba(29, 33, 41, 0.12);
+  transform: translateY(-1px);
+}
+
+.pg-todo-ico {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.24);
+  color: #fff;
+}
+
+.pg-todo-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pg-case .pg-todo-txt b {
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+  opacity: 0.95;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pg-case .pg-todo-txt strong {
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.pg-todo.is-blue {
+  background: linear-gradient(135deg, #5b8ff9, #3370ff);
+}
+
+.pg-todo.is-green {
+  background: linear-gradient(135deg, #3ec26f, #00b42a);
+}
+
+.pg-todo.is-orange {
+  background: linear-gradient(135deg, #ffa257, #f67437);
+}
+
+.pg-todo.is-violet {
+  background: linear-gradient(135deg, #9b8cf7, #7a5af8);
+}
+
+.pg-todo.is-red {
+  background: linear-gradient(135deg, #ff7875, #f53f3f);
+}
+
+.pg-todo.is-sky {
+  background: linear-gradient(135deg, #4fc3f7, #2e9bf0);
+}
+
+.pg-count-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #ebeef3;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-container);
+  text-decoration: none;
+  transition: border-color var(--duration);
+}
+
+.pg-count-row:hover {
+  background: var(--color-bg-hover-blue);
+  border-color: var(--color-primary-hover);
+}
+
+.pg-count-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+}
+
+.pg-count-num {
+  flex: 0 0 auto;
+  min-width: 26px;
+  height: 20px;
+  padding: 0 6px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 /* 小屏适配 */
 @media (max-width: 768px) {
+  .pg-grid-3,
+  .pg-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pg-field.is-grow {
+    flex: 1 1 100%;
+  }
+
+  .pg-factions {
+    margin-left: 0;
+  }
+
   .empty-state,
   .exception-view {
     flex-direction: column;

@@ -4,11 +4,11 @@ title: 轻提示 Toast
 
 # 轻提示 Toast
 
-<span class="level level-must">🔴 第 6.7 节 · 强制</span>
+<span class="level level-must">🔴 第 6.9 节 · 强制</span>
 
 操作结果的即时反馈，2 秒后自动关闭。只有成功与失败两种，不使用警告色提示条。
 
-## 6.7.1 形态
+## 6.9.1 形态
 
 <div class="demo">
   <div class="demo-label">toast / success</div>
@@ -30,7 +30,7 @@ title: 轻提示 Toast
   </div>
 </div>
 
-## 6.7.2 规格
+## 6.9.2 规格
 
 | 项目 | 成功 | 失败 |
 | --- | --- | --- |
@@ -52,7 +52,7 @@ title: 轻提示 Toast
   <li class="recommend">同一时刻只显示一条，新的提示替换旧的，不堆叠。</li>
 </ul>
 
-## 6.7.3 与弹窗的分工
+## 6.9.3 与弹窗的分工
 
 | 场景 | 组件 |
 | --- | --- |
@@ -60,7 +60,7 @@ title: 轻提示 Toast
 | 操作需要用户确认或输入 | 弹窗 Modal |
 | 需要用户阅读并处理的信息 | 页面内的 Alert 区块 |
 
-## 6.7.4 代码
+## 6.9.4 代码
 
 ```html
 <div class="toast toast-success">

@@ -4,11 +4,11 @@ title: 图标按钮与工具条
 
 # 图标按钮与工具条
 
-<span class="level level-recommend">🟡 第 6.8 节 · 推荐</span>
+<span class="level level-recommend">🟡 第 6.10 节 · 推荐</span>
 
 用于展开收起、导入导出、打印等无文字场景。所有图标按钮命中区不小于 32px。
 
-## 6.8.1 形态
+## 6.10.1 形态
 
 <div class="demo">
   <div class="demo-label">icon-button / default &amp; primary</div>
@@ -38,7 +38,7 @@ title: 图标按钮与工具条
   <li class="recommend">图标按钮之间间距 <code>8px</code>，图标按钮组与实心按钮组之间 <code>16px</code>。</li>
 </ul>
 
-## 6.8.2 单选与复选框
+## 6.10.2 单选与复选框
 
 <div class="demo">
   <div class="demo-label">radio &amp; checkbox</div>
@@ -53,7 +53,7 @@ title: 图标按钮与工具条
   <div class="demo-note">选中色统一使用主色，尺寸 18px，圆角：单选 50%、复选 2px。</div>
 </div>
 
-## 6.8.3 代码
+## 6.10.3 代码
 
 ```css
 .icon-btn {

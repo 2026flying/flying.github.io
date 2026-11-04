@@ -147,7 +147,14 @@ title: 色彩规范
     <div class="swatch-chip" style="background:#F7F8FA; color:#4E5969;">#F7F8FA</div>
     <div class="swatch-body">
       <span class="swatch-token">--color-bg-hover</span>
-      <span class="swatch-usage">悬停背景、表头背景</span>
+      <span class="swatch-usage">灰悬停：按钮、Chip、图标按钮</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-chip" style="background:#E6F3FE; color:#3370FF;">#E6F3FE</div>
+    <div class="swatch-body">
+      <span class="swatch-token">--color-bg-hover-blue</span>
+      <span class="swatch-usage">浅蓝悬停：表格行、侧边菜单、页签、列表行</span>
     </div>
   </div>
 </div>
@@ -160,7 +167,9 @@ title: 色彩规范
 | `--color-border` | 边框、分割线 | `#E5E6EB` |
 | `--color-bg-page` | 页面底色 | `#F2F3F5` |
 | `--color-bg-container` | 卡片、弹窗背景 | `#FFFFFF` |
-| `--color-bg-hover` | 悬停背景、表头背景 | `#F7F8FA` |
+| `--color-bg-hover` | 灰悬停：按钮、Chip、图标按钮 | `#F7F8FA` |
+| `--color-bg-hover-blue` | 浅蓝悬停：表格行、侧边菜单、分组标题、页签、一般列表行（v0.6 新增） | `#E6F3FE` |
+| `--color-table-row-hover` | `--color-bg-hover-blue` 的语义别名，仅表格使用 | `#E6F3FE` |
 
 ## 2.4 动作语义色
 
@@ -251,7 +260,8 @@ title: 色彩规范
 | --- | --- | --- | --- |
 | 页面容器 | `--color-text-primary` | `--color-bg-page` | — |
 | 卡片 / 弹窗 | `--color-text-primary` | `--color-bg-container` | `--color-border` |
-| 列表行 hover | `--color-text-primary` | `--color-bg-hover` | — |
+| 列表行 / 侧边菜单 / 页签 hover | `--color-text-primary` | `--color-bg-hover-blue` | — |
+| 表格行 hover | `--color-text-primary` | `--color-table-row-hover` | — |
 | 选中项 | `--color-primary` | `--color-primary-light` | — |
 | 禁用控件 | `--color-text-disabled` | `--color-bg-hover` | `--color-border` |
 | 校验失败 | `--color-danger` | `--color-bg-container` | `--color-danger` |
@@ -288,5 +298,7 @@ title: 色彩规范
   --color-bg-page: #f2f3f5;
   --color-bg-container: #ffffff;
   --color-bg-hover: #f7f8fa;
+  --color-bg-hover-blue: #e6f3fe;
+  --color-table-row-hover: var(--color-bg-hover-blue);
 }
 ```

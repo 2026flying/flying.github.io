@@ -4,11 +4,11 @@ title: 状态标签
 
 # 状态标签 State Tag
 
-<span class="level level-must">🔴 第 6.6 节 · 强制</span>
+<span class="level level-must">🔴 第 6.8 节 · 强制</span>
 
 用于列表状态列与详情页。**不使用实心填充**，统一「浅底 + 同色描边 + 同色文字」，让状态退到信息层级里。
 
-## 6.6.1 流程状态
+## 6.8.1 流程状态
 
 <div class="demo">
   <div class="demo-label">state / 流程状态</div>
@@ -20,7 +20,7 @@ title: 状态标签
   </div>
 </div>
 
-## 6.6.2 其余状态组
+## 6.8.2 其余状态组
 
 <div class="demo">
   <div class="demo-label">state / 阅读、启用、是否、委托</div>
@@ -47,7 +47,7 @@ title: 状态标签
 | 是否 | 是 / 否 | 红 / 灰 |
 | 委托状态 | 委托中 / 已失效 | 蓝 / 灰 |
 
-## 6.6.3 规则
+## 6.8.3 规则
 
 <ul class="rules">
   <li class="must">同一状态在全站必须同色，禁止「审批中」在列表是蓝色、在详情页是橙色。</li>
@@ -57,7 +57,7 @@ title: 状态标签
   <li class="recommend">一行内不同状态组的标签不要混排，按业务列分组展示。</li>
 </ul>
 
-## 6.6.4 代码
+## 6.8.4 代码
 
 ```css
 .state-tag {

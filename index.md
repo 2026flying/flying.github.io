@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: 公司产品 UI 设计规范
-  text: v0.1
+  text: v0.6
   tagline: 一套可验证的设计 Token 与组件标准，让设计与实现保持一致
   actions:
     - theme: brand
@@ -49,6 +49,8 @@ features:
 | [进度条 Progress](/components/progress) | 胶囊轨道、百分比、流光与不确定态 | <span class="level level-must">强制</span> |
 | [空状态 Empty](/components/empty-state) | 无数据 / 无结果 / 无权限的兜底版式 | <span class="level level-must">强制</span> |
 | [异常页 404](/components/exception) | 404 / 403 / 500 统一版式与文案 | <span class="level level-recommend">推荐</span> |
+| [全局组件](/components/navigation) | 骨架（侧边 / 顶部 / 混合 + 页签） | <span class="level level-recommend">推荐</span> |
+| [列表页](/components/list-page) | 页面模板：表格页 / 一般列表 / 卡片列表（均含侧边栏与顶栏） | <span class="level level-recommend">推荐</span> |
 | [交互与可访问性](/guide/accessibility) | 点击区域、对比度、动效时长 | <span class="level level-recommend">推荐</span> |
 | [交付与验收](/guide/delivery) | 开发侧 Token 交付、测试侧走查清单 | — |
 | [Trae 规则文件](/resources/trae-rules) | 从第 2–8 节派生的 AI 编码规则 | — |

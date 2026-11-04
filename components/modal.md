@@ -4,11 +4,11 @@ title: 弹窗 Modal
 
 # 弹窗 Modal
 
-<span class="level level-must">🔴 第 6.4 节 · 强制</span>
+<span class="level level-must">🔴 第 6.6 节 · 强制</span>
 
 弹窗用于阻断式确认与短表单，承接不适合跳转页面的操作。遮罩与按钮顺序是硬性要求。
 
-## 6.4.1 规范要点
+## 6.6.1 规范要点
 
 <ul class="rules">
   <li class="must">遮罩颜色固定 <code>rgba(0,0,0,0.4)</code>，对应 Token <code>--modal-mask</code>。</li>
@@ -19,7 +19,7 @@ title: 弹窗 Modal
   <li class="recommend">标题使用 16px / 600；正文使用 14px，颜色 <code>--color-text-secondary</code>。</li>
 </ul>
 
-## 6.4.2 标准弹窗
+## 6.6.2 标准弹窗
 
 <div class="demo">
   <div class="demo-label">modal / default</div>
@@ -36,7 +36,7 @@ title: 弹窗 Modal
   </div>
 </div>
 
-## 6.4.3 危险操作弹窗
+## 6.6.3 危险操作弹窗
 
 破坏性操作的确认按钮改为危险按钮，且文案必须说明后果。
 
@@ -55,7 +55,7 @@ title: 弹窗 Modal
   </div>
 </div>
 
-## 6.4.4 尺寸与间距
+## 6.6.4 尺寸与间距
 
 | 项目 | 值 | 说明 |
 | --- | --- | --- |
@@ -68,7 +68,7 @@ title: 弹窗 Modal
 | 底部内边距 | `12px 20px` | 与正文之间 `1px` 分割线 |
 | 按钮间距 | `8px` | 取消与确认之间 |
 
-## 6.4.5 代码
+## 6.6.5 代码
 
 ```html
 <div class="modal-mask">

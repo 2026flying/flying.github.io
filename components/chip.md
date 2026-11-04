@@ -4,11 +4,11 @@ title: 操作标签 Chip
 
 # 操作标签 Chip
 
-<span class="level level-must">🔴 第 6.5 节 · 强制</span>
+<span class="level level-must">🔴 第 6.7 节 · 强制</span>
 
 表格行内操作项达到 3 个以上时，改用「白底 + 浅描边 + 彩色文字」的标签形态。它比实心色块轻，又比纯文字更容易点中。
 
-## 6.5.1 形态
+## 6.7.1 形态
 
 <div class="demo">
   <div class="demo-label">chip / 操作列</div>
@@ -47,7 +47,7 @@ title: 操作标签 Chip
   <div class="demo-note">最后一行是禁用态：去掉色相，统一灰边灰字。</div>
 </div>
 
-## 6.5.2 颜色映射
+## 6.7.2 颜色映射
 
 | 动作 | 色相 | Token |
 | --- | --- | --- |
@@ -66,7 +66,7 @@ title: 操作标签 Chip
   <li class="recommend">Chip 之间间距 `6px`，换行行高 `28px`，避免密集到无法点击。</li>
 </ul>
 
-## 6.5.3 与文字按钮的取舍
+## 6.7.3 与文字按钮的取舍
 
 | 形态 | 何时用 |
 | --- | --- |
@@ -75,7 +75,7 @@ title: 操作标签 Chip
 
 两种形态不得在同一列混用。
 
-## 6.5.4 代码
+## 6.7.4 代码
 
 ```css
 .chip {

@@ -4,11 +4,11 @@ title: 表单 Form
 
 # 表单 Form
 
-<span class="level level-must">🔴 第 6.2 节 · 强制</span>
+<span class="level level-must">🔴 第 6.4 节 · 强制</span>
 
 表单规范只有 4 条硬性要求，但每一条都直接决定可用性。
 
-## 6.2.1 核心约束
+## 6.4.1 核心约束
 
 <ul class="rules">
   <li class="must">标签位置：<b>顶部对齐</b>，不允许左对齐或右侧悬浮标签。</li>
@@ -17,7 +17,7 @@ title: 表单 Form
   <li class="must">输入框高度：<code>32px</code> 或 <code>36px</code>，同一表单内必须统一。</li>
 </ul>
 
-## 6.2.2 基础表单
+## 6.4.2 基础表单
 
 <div class="demo">
   <div class="demo-label">form / default</div>
@@ -46,7 +46,7 @@ title: 表单 Form
   <div class="demo-note">错误提示与辅助说明均位于输入框下方；错误态边框同时变红。</div>
 </div>
 
-## 6.2.3 状态
+## 6.4.3 状态
 
 | 状态 | 边框 | 说明 |
 | --- | --- | --- |
@@ -56,7 +56,7 @@ title: 表单 Form
 | error | `--color-danger` | 下方同步显示错误文案 |
 | disabled | `--color-border`，背景 `--color-bg-hover` | 文字 `--color-text-disabled` |
 
-## 6.2.4 布局与间距
+## 6.4.4 布局与间距
 
 | 项目 | 值 | 说明 |
 | --- | --- | --- |
@@ -73,7 +73,7 @@ title: 表单 Form
   <li class="optional">多列表单在 1280px 以上可用两列布局，列间距 <code>24px</code>。</li>
 </ul>
 
-## 6.2.5 代码
+## 6.4.5 代码
 
 ```html
 <div class="field">

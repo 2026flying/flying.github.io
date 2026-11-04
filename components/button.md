@@ -4,11 +4,11 @@ title: 按钮 Button
 
 # 按钮 Button
 
-<span class="level level-must">🔴 第 6.1 节 · 强制</span>
+<span class="level level-must">🔴 第 6.3 节 · 强制</span>
 
 按钮用于触发即时操作。类型只有 3 种，状态必须 5 个全覆盖。
 
-## 6.1.1 类型
+## 6.3.1 类型
 
 <div class="demo">
   <div class="demo-label">button / type</div>
@@ -27,7 +27,7 @@ title: 按钮 Button
 | 次按钮 | 白底灰边 | 取消、关闭、次要操作 |
 | 危险按钮 | 红底白字 | 删除、批量移除等不可逆操作 |
 
-## 6.1.2 动作色板
+## 6.3.2 动作色板
 
 业务工具条的按钮**文案与颜色都是固定的**，同类动作跨页面必须同色。
 
@@ -78,7 +78,7 @@ title: 按钮 Button
 上文约束「同一区域最多一个主按钮」针对的是**内容区**（弹窗底部、卡片、表单）。工具条属于检索与流程操作区，允许「查询 + 1 个主动作」同为蓝色；其余动作需降级为白底灰边的次按钮或改用 [Chip](/components/chip) 形态。
 :::
 
-## 6.1.3 状态
+## 6.3.3 状态
 
 状态必须全覆盖 `default`、`hover`、`active`、`disabled`、`loading`。下表为强制要求，缺任意一项即为缺陷。
 
@@ -108,7 +108,7 @@ title: 按钮 Button
   <li class="must">禁用态不能只降低透明度，需同时改背景与文字色，保证可读。</li>
 </ul>
 
-## 6.1.4 使用约束
+## 6.3.4 使用约束
 
 <ul class="rules">
   <li class="must">同一区域最多只能有一个主按钮。</li>
@@ -126,7 +126,7 @@ title: 按钮 Button
   </div>
 </div>
 
-## 6.1.5 代码
+## 6.3.5 代码
 
 ```css
 .btn {
@@ -176,5 +176,5 @@ title: 按钮 Button
 ```
 
 ::: warning 走查易漏点
-常见缺陷：只做了 hover，没做 active；loading 期间仍可点击；禁用态用了 `opacity: 0.5` 导致文字对比度低于 AA。逐项对照 6.1.2 的状态表验收。
+常见缺陷：只做了 hover，没做 active；loading 期间仍可点击；禁用态用了 `opacity: 0.5` 导致文字对比度低于 AA。逐项对照 6.3.2 的状态表验收。
 :::

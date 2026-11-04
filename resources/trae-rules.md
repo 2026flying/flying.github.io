@@ -30,7 +30,7 @@ title: Trae 规则文件
         --color-action-custom #15C7D6、--color-action-neutral #898989
 中性色：--color-text-primary #1D2129、-secondary #4E5969、-disabled #C9CDD4、
         --color-border #E5E6EB、--color-bg-page #F2F3F5、--color-bg-container #FFF、
-        --color-bg-hover #F7F8FA
+        --color-bg-hover #F7F8FA、--color-bg-hover-blue #E6F3FE
 间距：--spacing-xs 4 / -sm 8 / -md 16 / -lg 24 / -xl 32
 圆角：--radius-sm 2 / -md 4 / -lg 8
 阴影：--shadow-card 0 1px 4px rgba(0,0,0,.05)、--shadow-dropdown 0 4px 10px rgba(0,0,0,.1)、

@@ -4,11 +4,11 @@ title: 进度条 Progress
 
 # 进度条 Progress
 
-<span class="level level-must">🔴 第 6.9 节 · 强制</span>
+<span class="level level-must">🔴 第 6.11 节 · 强制</span>
 
 进度条表达「还有多久」，不表达「正在忙」。因此只要知道总量，就必须给出百分比；无法预估耗时（如导入大文件、等待第三方回调）才允许使用不确定态。
 
-## 6.9.1 形态
+## 6.11.1 形态
 
 <div class="demo">
   <div class="demo-label">progress / 0% &amp; 50%</div>
@@ -25,7 +25,7 @@ title: 进度条 Progress
   <div class="demo-note">打开页面时填充条从 0 增长到目标值（720ms），百分比文字右对齐、等宽数字，数值变化时不左右跳动。</div>
 </div>
 
-## 6.9.2 规格
+## 6.11.2 规格
 
 | 项目 | 值 |
 | --- | --- |
@@ -37,7 +37,7 @@ title: 进度条 Progress
 | 文字间距 | `12px`，文字最小宽度 `42px` |
 | 最小宽度 | `80px`；无容器约束时不超过 `320px` |
 
-## 6.9.3 状态与动效
+## 6.11.3 状态与动效
 
 <div class="demo">
   <div class="demo-label">progress / active · done · indeterminate</div>
@@ -74,7 +74,7 @@ title: 进度条 Progress
   <li class="recommend">进度变化小于 1% 时不刷新界面，避免高频重绘。</li>
 </ul>
 
-## 6.9.4 无障碍
+## 6.11.4 无障碍
 
 | 项 | 要求 |
 | --- | --- |
@@ -83,7 +83,7 @@ title: 进度条 Progress
 | 不确定态 | 去掉 `aria-valuenow`，只保留 `aria-label` |
 | 颜色 | 填充与轨道对比度 ≥ 3:1（`#3370FF` on `#F5F5F5` 实测 3.9:1） |
 
-## 6.9.5 代码
+## 6.11.5 代码
 
 ```html
 <div class="progress-row">

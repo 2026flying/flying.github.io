@@ -5,8 +5,8 @@ title: 规范总览
 # 规范总览
 
 <div class="spec-meta">
-  <span>版本：<b>v0.1</b></span>
-  <span>更新日期：<b>2026-11-02</b></span>
+  <span>版本：<b>v0.6</b></span>
+  <span>更新日期：<b>2026-11-03</b></span>
   <span>适用端：<b>Web 端（PC 浏览器）</b></span>
 </div>
 
@@ -16,8 +16,8 @@ title: 规范总览
 
 | 项目 | 内容 |
 | --- | --- |
-| 当前版本 | v0.1 |
-| 更新日期 | 2026-11-02 |
+| 当前版本 | v0.6 |
+| 更新日期 | 2026-11-03 |
 | 适用端 | Web 端（PC 浏览器） |
 | 适用角色 | UI 设计师、前端开发、测试、产品经理 |
 | 源文件 | `公司产品 UI 设计规范.md` |
@@ -62,7 +62,7 @@ title: 规范总览
 | 3 | 字体与排版 | [字体与排版](/foundation/typography) | <span class="level level-must">强制</span> |
 | 4 | 间距与栅格 | [间距与栅格](/foundation/spacing) | <span class="level level-must">强制</span> |
 | 5 | 圆角、阴影与层级 | [圆角与阴影](/foundation/radius-shadow) | <span class="level level-recommend">推荐</span> |
-| 6 | 组件规范 | [按钮](/components/button) · [图标按钮](/components/icon-button) · [Chip](/components/chip) · [状态标签](/components/status-tag) · [表单](/components/form) · [表格](/components/table) · [弹窗](/components/modal) · [轻提示](/components/toast)<br>[进度条](/components/progress) · [空状态](/components/empty-state) · [异常页](/components/exception) | <span class="level level-must">强制</span> |
+| 6 | 组件规范 | [按钮](/components/button) · [图标按钮](/components/icon-button) · [Chip](/components/chip) · [状态标签](/components/status-tag) · [表单](/components/form) · [表格](/components/table) · [弹窗](/components/modal) · [轻提示](/components/toast)<br>[进度条](/components/progress) · [空状态](/components/empty-state) · [异常页](/components/exception) · [全局组件](/components/navigation)（骨架）· [列表页](/components/list-page)（表格页 / 一般列表 / 卡片列表） | <span class="level level-must">强制</span> |
 | 7 | 交互与可访问性 | [交互与可访问性](/guide/accessibility) | <span class="level level-recommend">推荐</span> |
 | 8 | 交付与验收 | [交付与验收](/guide/delivery) | — |
 | 9 | Trae 规则文件 | [Trae 规则文件](/resources/trae-rules)（派生） | — |
