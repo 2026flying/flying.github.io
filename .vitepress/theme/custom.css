@@ -1160,14 +1160,63 @@ body {
 }
 
 .modal-head {
-  padding: 16px 20px 8px;
+  padding: 16px 48px 12px 20px;
   font-size: var(--font-size-module);
   font-weight: 600;
   color: var(--color-text-primary);
+  border-bottom: 1px solid #e4e4e4;
+}
+
+/* 右上角关闭：一个 ×（用两笔伪元素画，保证在圆圈内绝对居中）；
+   悬停浮出一圈淡色线性圆圈，点击等效「取消」 */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 15px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: transparent; /* 真正的 × 由伪元素绘制 */
+  font-size: 0;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.modal-close::before,
+.modal-close::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: var(--color-text-secondary);
+}
+
+.modal-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.modal-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modal-close:hover {
+  border-color: #d0d3d9;
+}
+
+.modal-close:hover::before,
+.modal-close:hover::after {
+  background: var(--color-text-primary);
 }
 
 .modal-body {
-  padding: 0 20px 20px;
+  padding: 16px 20px 20px;
   font-size: var(--font-size-body);
   color: var(--color-text-secondary);
   line-height: 1.6;
@@ -1178,7 +1227,6 @@ body {
   justify-content: flex-end;
   gap: 8px;
   padding: 12px 20px;
-  border-top: 1px solid var(--color-border);
   background: var(--color-bg-container);
 }
 
